@@ -11,19 +11,16 @@ import Then
 
 class ViewController: UIViewController {
     
-    let scrollView = UIScrollView().then {
+    let tableview = UITableView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    let contentView = UIView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .gray
     }
     
     let rightbarImageView = UIImageView().then {
         $0.image = UIImage(systemName: "person.circle")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    var items: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,36 +31,26 @@ class ViewController: UIViewController {
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "게임, 앱, 스토리 등 "
+        searchController.searchBar.delegate = self
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
         subviews()
         setConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
+        tableview.delegate = self
+        tableview.dataSource = self
+        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     private func subviews() {
-        self.view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        self.view.addSubview(tableview)
     }
     
     private func setConstraints() {
         
-        scrollView.snp.makeConstraints {
+        tableview.snp.makeConstraints {
             $0.top.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.top.left.right.bottom.equalToSuperview()
-            $0.width.equalTo(scrollView.snp.width)
-            $0.height.equalTo(scrollView.snp.height).multipliedBy(2)
         }
         
         // navigationBar LargeTitle right view
@@ -87,4 +74,38 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UITableViewCell else { return UITableViewCell() }
+        cell.textLabel?.text = items[indexPath.row]
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "최근 검색어"
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        items.append(text)
+        tableview.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        items.append(text)
+        tableview.reloadData()
+    }
 }
