@@ -8,8 +8,11 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
+import ReactorKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ReactorKit.View {
     
     let tableview = UITableView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +23,13 @@ class ViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    let searchController = UISearchController(searchResultsController: nil).then {
+        $0.searchBar.placeholder = "게임, 앱, 스토리 등 "
+    }
+    
     var items: [String] = []
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +38,39 @@ class ViewController: UIViewController {
         
         self.navigationItem.title = "검색"
         
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "게임, 앱, 스토리 등 "
-        searchController.searchBar.delegate = self
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
         subviews()
         setConstraints()
         
-        tableview.delegate = self
-        tableview.dataSource = self
+        tableview.rx.setDelegate(self)
+            .disposed(by: disposeBag)
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+    func bind(reactor: SearchReactor) {
+        // Action
+        searchController.searchBar.rx.searchButtonClicked
+            .map { [weak self] _ in
+                guard let text = self?.searchController.searchBar.text else {
+                    return Reactor.Action.searchKeyboardClicked("")
+                }
+                return Reactor.Action.searchKeyboardClicked(text)
+            }
+            .do(onNext: { [weak self] _ in
+                self?.searchController.searchBar.text = ""
+            })
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // State
+        reactor.state
+            .map { $0.recentKeywords }
+            .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { (indexPath, element, cell) in
+                cell.textLabel?.text = element
+            }
+            .disposed(by: disposeBag)
     }
     
     private func subviews() {
@@ -76,36 +106,12 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UITableViewCell else { return UITableViewCell() }
-        cell.textLabel?.text = items[indexPath.row]
-        return cell
-    }
-    
+extension ViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    private func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "최근 검색어"
-    }
-}
-
-extension ViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text else { return }
-        items.append(text)
-        tableview.reloadData()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text else { return }
-        items.append(text)
-        tableview.reloadData()
     }
 }
