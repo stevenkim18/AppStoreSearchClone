@@ -19,7 +19,7 @@ final class SearchReactor: Reactor {
     }
     
     struct State {
-        var recentKeywords: [String] = ["Asd"]
+        var recentKeywords: [String] = ["", "", ""]
     }
     
     var initialState: State = State()

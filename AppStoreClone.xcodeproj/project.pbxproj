@@ -21,6 +21,7 @@
 		C0B59D372AF0FBF500150DE9 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D362AF0FBF500150DE9 /* RxSwift */; };
 		C0B59D3A2AF0FBFF00150DE9 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D392AF0FBFF00150DE9 /* ReactorKit */; };
 		C0B59D3C2AF0FC2500150DE9 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */; };
+		C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		C0B59D1E2AEF802100150DE9 /* AppStoreCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITests.swift; sourceTree = "<group>"; };
 		C0B59D202AEF802100150DE9 /* AppStoreCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
+		C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				C0B59D082AEF802100150DE9 /* LaunchScreen.storyboard */,
 				C0B59D0B2AEF802100150DE9 /* Info.plist */,
 				C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */,
+				C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */,
 			);
 			path = AppStoreClone;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0B59D3C2AF0FC2500150DE9 /* SearchReactor.swift in Sources */,
+				C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */,
 				C0B59D022AEF802000150DE9 /* ViewController.swift in Sources */,
 				C0B59CFE2AEF802000150DE9 /* AppDelegate.swift in Sources */,
 				C0B59D002AEF802000150DE9 /* SceneDelegate.swift in Sources */,

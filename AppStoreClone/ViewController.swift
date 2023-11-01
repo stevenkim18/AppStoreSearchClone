@@ -44,7 +44,9 @@ class ViewController: UIViewController, ReactorKit.View {
         subviews()
         setConstraints()
         
-        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableview.register(AppListTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableview.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
     
     func bind(reactor: SearchReactor) {
@@ -65,8 +67,8 @@ class ViewController: UIViewController, ReactorKit.View {
         // State
         reactor.state
             .map { $0.recentKeywords }
-            .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { (indexPath, element, cell) in
-                cell.textLabel?.text = element
+            .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: AppListTableViewCell.self)) { (indexPath, element, cell) in
+                
             }
             .disposed(by: disposeBag)
     }
@@ -102,4 +104,10 @@ class ViewController: UIViewController, ReactorKit.View {
         }
     }
     
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        352
+    }
 }
