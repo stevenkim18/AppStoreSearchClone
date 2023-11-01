@@ -44,8 +44,6 @@ class ViewController: UIViewController, ReactorKit.View {
         subviews()
         setConstraints()
         
-        tableview.rx.setDelegate(self)
-            .disposed(by: disposeBag)
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
@@ -104,14 +102,4 @@ class ViewController: UIViewController, ReactorKit.View {
         }
     }
     
-}
-
-extension ViewController: UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
-    private func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "최근 검색어"
-    }
 }
