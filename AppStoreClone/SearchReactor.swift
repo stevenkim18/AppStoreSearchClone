@@ -10,16 +10,21 @@ import ReactorKit
 import RxSwift
 
 final class SearchReactor: Reactor {
+    
+    let network = Networking()
+    
     enum Action {
         case searchKeyboardClicked(String)
     }
     
     enum Mutation {
-        case addKeyword(String)
+        case addKeyword(String)         // 로컬 디비에 최근 검색어 저장
+        case addAppInfo([AppInfoEntity])
     }
     
     struct State {
-        var recentKeywords: [String] = ["", "", ""]
+        var recentKeywords: [String] = [] // 검색어 로컬 db로 부터 불러와야 함.
+        var appinfos: [AppInfoEntity] = []
     }
     
     var initialState: State = State()
@@ -27,7 +32,9 @@ final class SearchReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case let .searchKeyboardClicked(keyword):
-            return Observable.just(Mutation.addKeyword(keyword))
+            return fetchAppsInfos(keyword: keyword)
+                .flatMap { Observable.just(Mutation.addAppInfo($0.results)) }
+                .catch { _ in .empty() }
         }
     }
     
@@ -37,7 +44,18 @@ final class SearchReactor: Reactor {
             var newState = state
             newState.recentKeywords.append(keyword)
             return newState
+        case let.addAppInfo(entity):
+            var newState = state
+            newState.appinfos = entity
+            return newState
         }
     }
     
+}
+
+extension SearchReactor {
+    private func fetchAppsInfos(keyword: String) -> Observable<AppInfoResultEntity> {
+        return network.request(HomeApi.fetchAppsInfo(keyword))
+            .asObservable()
+    }
 }

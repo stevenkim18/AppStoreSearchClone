@@ -73,6 +73,16 @@ class AppListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(_ entity: AppInfoEntity) {
+        iconImageView.load(url: URL(string: entity.artworkUrl100)!)
+        titleLabel.text = entity.trackName
+        subtitleLabel.text = entity.genres.joined(separator: ", ")
+        rateLabel.text = String(format: "%.1f", entity.averageUserRating)
+        firstScreenShotImageView.load(url: URL(string: entity.screenshotUrls[0])!)
+        secondScreenShotImageView.load(url: URL(string: entity.screenshotUrls[1])!)
+        thirdScreenShotImageView.load(url: URL(string: entity.screenshotUrls[2])!)
+    }
+    
     private func subviews() {
         [iconImageView,
          titleLabel, subtitleLabel, rateLabel,
@@ -152,5 +162,19 @@ extension UIImage {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
+    }
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
 }

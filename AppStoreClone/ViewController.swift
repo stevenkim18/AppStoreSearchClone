@@ -66,9 +66,9 @@ class ViewController: UIViewController, ReactorKit.View {
         
         // State
         reactor.state
-            .map { $0.recentKeywords }
+            .map { $0.appinfos }
             .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: AppListTableViewCell.self)) { (indexPath, element, cell) in
-                
+                cell.configure(element)
             }
             .disposed(by: disposeBag)
     }

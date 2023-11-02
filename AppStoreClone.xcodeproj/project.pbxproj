@@ -22,6 +22,9 @@
 		C0B59D3A2AF0FBFF00150DE9 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D392AF0FBFF00150DE9 /* ReactorKit */; };
 		C0B59D3C2AF0FC2500150DE9 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */; };
 		C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */; };
+		C0B59D402AF3782400150DE9 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3F2AF3782400150DE9 /* Networking.swift */; };
+		C0B59D422AF38F7F00150DE9 /* Entitys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D412AF38F7F00150DE9 /* Entitys.swift */; };
+		C0B59D442AF38FA500150DE9 /* ApiTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D432AF38FA500150DE9 /* ApiTargetType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 		C0B59D202AEF802100150DE9 /* AppStoreCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
 		C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListTableViewCell.swift; sourceTree = "<group>"; };
+		C0B59D3F2AF3782400150DE9 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		C0B59D412AF38F7F00150DE9 /* Entitys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entitys.swift; sourceTree = "<group>"; };
+		C0B59D432AF38FA500150DE9 /* ApiTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTargetType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,9 @@
 				C0B59D0B2AEF802100150DE9 /* Info.plist */,
 				C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */,
 				C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */,
+				C0B59D3F2AF3782400150DE9 /* Networking.swift */,
+				C0B59D412AF38F7F00150DE9 /* Entitys.swift */,
+				C0B59D432AF38FA500150DE9 /* ApiTargetType.swift */,
 			);
 			path = AppStoreClone;
 			sourceTree = "<group>";
@@ -284,9 +293,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0B59D3C2AF0FC2500150DE9 /* SearchReactor.swift in Sources */,
+				C0B59D442AF38FA500150DE9 /* ApiTargetType.swift in Sources */,
 				C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */,
 				C0B59D022AEF802000150DE9 /* ViewController.swift in Sources */,
+				C0B59D402AF3782400150DE9 /* Networking.swift in Sources */,
 				C0B59CFE2AEF802000150DE9 /* AppDelegate.swift in Sources */,
+				C0B59D422AF38F7F00150DE9 /* Entitys.swift in Sources */,
 				C0B59D002AEF802000150DE9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
