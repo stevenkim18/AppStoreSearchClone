@@ -13,7 +13,7 @@ final class SearchReactor: Reactor {
     
     let network = Networking()
     
-    enum Action {
+    enum Action: Equatable {
         case searchKeyboardClicked(String)
     }
     
