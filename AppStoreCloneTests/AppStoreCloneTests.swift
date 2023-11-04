@@ -9,6 +9,7 @@ import XCTest
 import RxTest
 import RxCocoa
 import RxSwift
+import RxBlocking
 @testable import AppStoreClone
 
 final class AppStoreCloneTests: XCTestCase {
@@ -38,5 +39,23 @@ final class AppStoreCloneTests: XCTestCase {
         // Then
         XCTAssertEqual(reactor.stub.actions.last, .searchKeyboardClicked(searchKeyword))
     }
+    
+    func test검색어입력액션이_전달되었을_때_실제_API가_호출되고_앱정보결과값이_넣어진다() {
+        let reactor = SearchReactor()
+        
+        let disposeBag = DisposeBag()
+        
+        reactor.action.onNext(.searchKeyboardClicked("성경"))
+        
+        guard let response = try? reactor.state.skip(1).toBlocking(timeout: 10).first() else {
+            XCTFail("")
+            return
+        }
+        
+        // 초기 값은 appinfos가 빈 배열인데
+        // 네크워크에 성공하면 1개 이상 값이 들어옴(지금 10개씩 받아오게 세팅해 둠)
+        XCTAssertTrue(response.appinfos.count != 0)
+    }
+    
 
 }
