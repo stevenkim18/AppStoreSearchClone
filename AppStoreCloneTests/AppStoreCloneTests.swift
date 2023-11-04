@@ -57,5 +57,21 @@ final class AppStoreCloneTests: XCTestCase {
         XCTAssertTrue(response.appinfos.count != 0)
     }
     
+    func testAPI통신_결과로_앱_정보들에_대한_값들을_변경되었을_때_TableView에_잘_반영이_된다() {
+        // Given
+        let appInfos: [AppInfoEntity] = [AppInfoEntity.mock()]
+        
+        let reactor = SearchReactor()
+        reactor.isStubEnabled = true
+        
+        let viewcontroller = ViewController()
+        viewcontroller.reactor = reactor
+        
+        // When
+        reactor.stub.state.value.appinfos = appInfos
+        
+        // Then
+        XCTAssertEqual(viewcontroller.tableview.numberOfRows(inSection: 0), appInfos.count)
+    }
 
 }
