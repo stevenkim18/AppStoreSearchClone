@@ -79,6 +79,7 @@ class AppListTableViewCell: UITableViewCell {
         subtitleLabel.text = entity.genres.joined(separator: ", ")
         rateLabel.text = String(format: "%.1f", entity.averageUserRating)
         firstScreenShotImageView.load(url: URL(string: entity.screenshotUrls[0])!)
+        // TODO: URL 없는 경우 처리
         secondScreenShotImageView.load(url: URL(string: entity.screenshotUrls[1])!)
         thirdScreenShotImageView.load(url: URL(string: entity.screenshotUrls[2])!)
     }

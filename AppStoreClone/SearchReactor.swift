@@ -15,16 +15,19 @@ final class SearchReactor: Reactor {
     
     enum Action: Equatable {
         case searchKeyboardClicked(String)
+        case selectCell(Int)
     }
     
     enum Mutation {
         case addKeyword(String)         // 로컬 디비에 최근 검색어 저장
         case addAppInfo([AppInfoEntity])
+        case setAppItem(AppInfoEntity)
     }
     
     struct State {
         var recentKeywords: [String] = [] // 검색어 로컬 db로 부터 불러와야 함.
         var appinfos: [AppInfoEntity] = []
+        var selectedInfo: AppInfoEntity? = nil
     }
     
     var initialState: State = State()
@@ -35,6 +38,9 @@ final class SearchReactor: Reactor {
             return fetchAppsInfos(keyword: keyword)
                 .flatMap { Observable.just(Mutation.addAppInfo($0.results)) }
                 .catch { _ in .empty() }
+        case let.selectCell(row):
+            let item = self.currentState.appinfos[row]
+            return Observable.just(Mutation.setAppItem(item))
         }
     }
     
@@ -44,9 +50,13 @@ final class SearchReactor: Reactor {
             var newState = state
             newState.recentKeywords.append(keyword)
             return newState
-        case let.addAppInfo(entity):
+        case let .addAppInfo(entity):
             var newState = state
             newState.appinfos = entity
+            return newState
+        case let .setAppItem(entity):
+            var newState = state
+            newState.selectedInfo = entity
             return newState
         }
     }

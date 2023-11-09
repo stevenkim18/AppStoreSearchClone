@@ -75,11 +75,27 @@ class ViewController: UIViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
+        tableview.rx.itemSelected
+                .map { Reactor.Action.selectCell($0.row) }
+                .bind(to: reactor.action)
+                .disposed(by: disposeBag)
+        
         // State
         reactor.state
             .map { $0.appinfos }
             .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: AppListTableViewCell.self)) { (indexPath, element, cell) in
                 cell.configure(element)
+            }
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.selectedInfo }
+            .compactMap{ $0 }
+            .subscribe { [weak self] entity in
+                DispatchQueue.main.async {
+                    let detailViewController = DetailViewController(appinfo: entity)
+                    self?.navigationController?.pushViewController(detailViewController, animated: true)
+                }
             }
             .disposed(by: disposeBag)
     }
