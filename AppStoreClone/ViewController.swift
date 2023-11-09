@@ -49,6 +49,17 @@ class ViewController: UIViewController, ReactorKit.View {
             .disposed(by: disposeBag)
     }
     
+    // TODO: RxViewController로 구현.
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        rightbarImageView.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        rightbarImageView.isHidden = false
+    }
+    
     func bind(reactor: SearchReactor) {
         // Action
         searchController.searchBar.rx.searchButtonClicked
