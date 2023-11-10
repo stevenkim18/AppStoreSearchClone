@@ -22,12 +22,15 @@ final class SearchReactor: Reactor {
         case addKeyword(String)         // 로컬 디비에 최근 검색어 저장
         case addAppInfo([AppInfoEntity])
         case setAppItem(AppInfoEntity)
+        case setSearchResult(Bool, String)
     }
     
     struct State {
         var recentKeywords: [String] = [] // 검색어 로컬 db로 부터 불러와야 함.
         var appinfos: [AppInfoEntity] = []
         var selectedInfo: AppInfoEntity? = nil
+        var resultValue: (isResultCountZero: Bool, keyword: String) = (false, "")
+//        var isResultCountZero: Bool = false
     }
     
     var initialState: State = State()
@@ -36,7 +39,19 @@ final class SearchReactor: Reactor {
         switch action {
         case let .searchKeyboardClicked(keyword):
             return fetchAppsInfos(keyword: keyword)
-                .flatMap { Observable.just(Mutation.addAppInfo($0.results)) }
+                .flatMap {
+                    if $0.resultCount == 0 {
+                        return Observable.concat([
+                            Observable.just(Mutation.setSearchResult(true, keyword)),
+                            Observable.just(Mutation.addAppInfo([]))
+                        ])
+                    } else {
+                        return Observable.concat([
+                            Observable.just(Mutation.setSearchResult(false, keyword)),
+                            Observable.just(Mutation.addAppInfo($0.results))
+                        ])
+                    }
+                }
                 .catch { _ in .empty() }
         case let.selectCell(row):
             let item = self.currentState.appinfos[row]
@@ -58,6 +73,10 @@ final class SearchReactor: Reactor {
         case let .setAppItem(entity):
             var newState = state
             newState.selectedInfo = entity
+            return newState
+        case let .setSearchResult(isResultCountZero, keyword):
+            var newState = state
+            newState.resultValue = (isResultCountZero, keyword)
             return newState
         }
     }

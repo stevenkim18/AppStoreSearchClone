@@ -27,6 +27,20 @@ class ViewController: UIViewController, ReactorKit.View {
         $0.searchBar.placeholder = "게임, 앱, 스토리 등 "
     }
     
+    let emptyView = UIView().then {
+        $0.isHidden = true
+    }
+    
+    let noResultLabel = UILabel().then {
+        $0.text = "결과 없음"
+        $0.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+    }
+    
+    let noResultKeywordLabel = UILabel().then {
+        $0.font = UIFont.systemFont(ofSize: 16)
+        $0.textColor = .gray
+    }
+    
     var items: [String] = []
     
     var disposeBag = DisposeBag()
@@ -91,17 +105,31 @@ class ViewController: UIViewController, ReactorKit.View {
         reactor.state
             .map { $0.selectedInfo }
             .compactMap{ $0 }
+            // TODO: Driver 적용.
             .subscribe { [weak self] entity in
                 DispatchQueue.main.async {
+                    self?.emptyView.isHidden = true
                     let detailViewController = DetailViewController(appinfo: entity)
                     self?.navigationController?.pushViewController(detailViewController, animated: true)
                 }
             }
             .disposed(by: disposeBag)
+        
+        reactor.state
+            .map{ $0.resultValue }
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isResultCountZero, keyword in
+                self?.noResultKeywordLabel.text = "'\(keyword)'"
+                self?.emptyView.isHidden = !isResultCountZero
+            }.disposed(by: disposeBag)
     }
     
     private func subviews() {
         self.view.addSubview(tableview)
+        
+        self.view.addSubview(emptyView)
+        self.emptyView.addSubview(noResultLabel)
+        self.emptyView.addSubview(noResultKeywordLabel)
     }
     
     private func setConstraints() {
@@ -128,6 +156,19 @@ class ViewController: UIViewController, ReactorKit.View {
                 }
                 break
             }
+        }
+        
+        emptyView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        noResultLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        noResultKeywordLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(noResultLabel.snp.bottom).offset(10)
         }
     }
     
