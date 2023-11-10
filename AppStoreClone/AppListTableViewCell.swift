@@ -13,7 +13,6 @@ import Kingfisher
 class AppListTableViewCell: UITableViewCell {
     
     let iconImageView = UIImageView(frame: .zero).then {
-        $0.image = UIImage(systemName: "pencil")?.withBackground(color: .gray)
         $0.layer.cornerRadius = 14
         $0.layer.masksToBounds = true
     }
@@ -53,17 +52,14 @@ class AppListTableViewCell: UITableViewCell {
     }
     
     let firstScreenShotImageView = UIImageView().then {
-        $0.image = UIImage.imageWithColor(tintColor: .red)
         $0.layer.cornerRadius = 11
         $0.layer.masksToBounds = true
     }
     let secondScreenShotImageView = UIImageView().then {
-        $0.image = UIImage.imageWithColor(tintColor: .yellow)
         $0.layer.cornerRadius = 11
         $0.layer.masksToBounds = true
     }
     let thirdScreenShotImageView = UIImageView().then {
-        $0.image = UIImage.imageWithColor(tintColor: .green)
         $0.layer.cornerRadius = 11
         $0.layer.masksToBounds = true
     }
@@ -147,16 +143,16 @@ class AppListTableViewCell: UITableViewCell {
 //extension UIImage {
 //  func withBackground(color: UIColor, opaque: Bool = true) -> UIImage {
 //    UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
-//        
+//
 //    guard let ctx = UIGraphicsGetCurrentContext(), let image = cgImage else { return self }
 //    defer { UIGraphicsEndImageContext() }
-//        
+//
 //    let rect = CGRect(origin: .zero, size: size)
 //    ctx.setFillColor(color.cgColor)
 //    ctx.fill(rect)
 //    ctx.concatenate(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height))
 //    ctx.draw(image, in: rect)
-//        
+//
 //    return UIGraphicsGetImageFromCurrentImageContext() ?? self
 //  }
 //}
@@ -173,16 +169,16 @@ class AppListTableViewCell: UITableViewCell {
 //    }
 //}
 //
-//extension UIImageView {
-//    func load(url: URL) {
-//        DispatchQueue.global().async { [weak self] in
-//            if let data = try? Data(contentsOf: url) {
-//                if let image = UIImage(data: data) {
-//                    DispatchQueue.main.async {
-//                        self?.image = image
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+}
