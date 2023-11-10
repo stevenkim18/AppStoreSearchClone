@@ -33,9 +33,13 @@ class DetailViewController: UIViewController {
         $0.textColor = UIColor.init(red: 138/255, green: 138/255, blue: 138/255, alpha: 1)
     }
     // 다운로드 버튼
-    let downloadButton = UIButton(configuration: .filled()).then {
-        $0.setTitle("받기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+    let downloadButton = UIButton().then {
+        var title = AttributedString("받기")
+        title.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        var configuration = UIButton.Configuration.filled()
+        configuration.attributedTitle = title
+        $0.configuration = configuration
+        
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 14
     }
@@ -168,7 +172,7 @@ class DetailViewController: UIViewController {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(iconImageView.snp.top).inset(3)
             $0.left.equalTo(iconImageView.snp.right).offset(15)
-            $0.right.equalTo(19)
+            $0.right.equalTo(-19)
         }
 
         developerLabel.snp.makeConstraints {

@@ -52,6 +52,7 @@ final class SearchReactor: Reactor {
             return newState
         case let .addAppInfo(entity):
             var newState = state
+            newState.selectedInfo = nil
             newState.appinfos = entity
             return newState
         case let .setAppItem(entity):

@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import Kingfisher
 
 class AppListTableViewCell: UITableViewCell {
     
@@ -33,11 +34,16 @@ class AppListTableViewCell: UITableViewCell {
         $0.text = "5"
     }
     
-    let downloadButton = UIButton(configuration: .gray()).then {
-        $0.setTitle("받기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+    let downloadButton = UIButton().then {
+        var title = AttributedString("받기")
+        title.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        var configuration = UIButton.Configuration.gray()
+        configuration.attributedTitle = title
+        
+        $0.configuration = configuration
+        
         $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 14
+        $0.layer.cornerRadius = 13.5
     }
     
     let appImageStackView = UIStackView().then {
@@ -74,14 +80,15 @@ class AppListTableViewCell: UITableViewCell {
     }
     
     func configure(_ entity: AppInfoEntity) {
-        iconImageView.load(url: URL(string: entity.artworkUrl100)!)
+        // TODO: 킹피셔를 사용하지 않을 떄는 이미지가 깜빡 거림. 원인 알아야 함.
+        iconImageView.kf.setImage(with: URL(string: entity.artworkUrl100)!)
         titleLabel.text = entity.trackName
         subtitleLabel.text = entity.genres.joined(separator: ", ")
         rateLabel.text = String(format: "%.1f", entity.averageUserRating)
-        firstScreenShotImageView.load(url: URL(string: entity.screenshotUrls[0])!)
+        firstScreenShotImageView.kf.setImage(with: URL(string: entity.screenshotUrls[0])!)
         // TODO: URL 없는 경우 처리
-        secondScreenShotImageView.load(url: URL(string: entity.screenshotUrls[1])!)
-        thirdScreenShotImageView.load(url: URL(string: entity.screenshotUrls[2])!)
+        secondScreenShotImageView.kf.setImage(with: URL(string: entity.screenshotUrls[1])!)
+        thirdScreenShotImageView.kf.setImage(with: URL(string: entity.screenshotUrls[2])!)
     }
     
     private func subviews() {
@@ -95,7 +102,6 @@ class AppListTableViewCell: UITableViewCell {
          thirdScreenShotImageView].forEach { [weak self] imageview in
             self?.appImageStackView.addArrangedSubview(imageview)
         }
-        appImageStackView.backgroundColor = .cyan
     }
     
     private func setConstraints() {
@@ -109,6 +115,7 @@ class AppListTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(iconImageView.snp.top)
             $0.left.equalTo(iconImageView.snp.right).offset(10)
+            $0.right.equalTo(downloadButton.snp.left).offset(-10)
         }
         
         subtitleLabel.snp.makeConstraints {
@@ -124,8 +131,8 @@ class AppListTableViewCell: UITableViewCell {
         downloadButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(38)
             $0.right.equalToSuperview().offset(-20)
-            $0.width.equalTo(80)
-            $0.height.equalTo(28)
+            $0.width.equalTo(69)
+            $0.height.equalTo(27)
         }
         
         appImageStackView.snp.makeConstraints {
@@ -137,45 +144,45 @@ class AppListTableViewCell: UITableViewCell {
     }
 }
 
-extension UIImage {
-  func withBackground(color: UIColor, opaque: Bool = true) -> UIImage {
-    UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
-        
-    guard let ctx = UIGraphicsGetCurrentContext(), let image = cgImage else { return self }
-    defer { UIGraphicsEndImageContext() }
-        
-    let rect = CGRect(origin: .zero, size: size)
-    ctx.setFillColor(color.cgColor)
-    ctx.fill(rect)
-    ctx.concatenate(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height))
-    ctx.draw(image, in: rect)
-        
-    return UIGraphicsGetImageFromCurrentImageContext() ?? self
-  }
-}
-
-extension UIImage {
-   static func imageWithColor(tintColor: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-        tintColor.setFill()
-        UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return image
-    }
-}
-
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
+//extension UIImage {
+//  func withBackground(color: UIColor, opaque: Bool = true) -> UIImage {
+//    UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+//        
+//    guard let ctx = UIGraphicsGetCurrentContext(), let image = cgImage else { return self }
+//    defer { UIGraphicsEndImageContext() }
+//        
+//    let rect = CGRect(origin: .zero, size: size)
+//    ctx.setFillColor(color.cgColor)
+//    ctx.fill(rect)
+//    ctx.concatenate(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height))
+//    ctx.draw(image, in: rect)
+//        
+//    return UIGraphicsGetImageFromCurrentImageContext() ?? self
+//  }
+//}
+//
+//extension UIImage {
+//   static func imageWithColor(tintColor: UIColor) -> UIImage {
+//        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+//        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+//        tintColor.setFill()
+//        UIRectFill(rect)
+//        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+//        UIGraphicsEndImageContext()
+//        return image
+//    }
+//}
+//
+//extension UIImageView {
+//    func load(url: URL) {
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url) {
+//                if let image = UIImage(data: data) {
+//                    DispatchQueue.main.async {
+//                        self?.image = image
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
