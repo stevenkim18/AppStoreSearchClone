@@ -28,7 +28,7 @@ final class SearchReactor: Reactor {
     struct State {
         var recentKeywords: [String] = [] // 검색어 로컬 db로 부터 불러와야 함.
         var appinfos: [AppInfoEntity] = []
-        var selectedInfo: AppInfoEntity? = nil
+        @Pulse var selectedInfo: AppInfoEntity?
         var resultValue: (isResultCountZero: Bool, keyword: String) = (false, "")
 //        var isResultCountZero: Bool = false
     }

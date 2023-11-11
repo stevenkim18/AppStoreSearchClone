@@ -102,10 +102,8 @@ class ViewController: UIViewController, ReactorKit.View {
             }
             .disposed(by: disposeBag)
         
-        reactor.state
-            .map { $0.selectedInfo }
+        reactor.pulse(\.$selectedInfo)
             .compactMap{ $0 }
-            // TODO: Driver 적용.
             .subscribe { [weak self] entity in
                 DispatchQueue.main.async {
                     self?.emptyView.isHidden = true
