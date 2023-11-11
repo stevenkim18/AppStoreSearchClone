@@ -41,6 +41,11 @@ class ViewController: UIViewController, ReactorKit.View {
         $0.textColor = .gray
     }
     
+    let loadingView = UIActivityIndicatorView().then {
+        $0.isHidden = true
+        $0.backgroundColor = .gray
+    }
+    
     var items: [String] = []
     
     var disposeBag = DisposeBag()
@@ -120,6 +125,15 @@ class ViewController: UIViewController, ReactorKit.View {
                 self?.noResultKeywordLabel.text = "'\(keyword)'"
                 self?.emptyView.isHidden = !isResultCountZero
             }.disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.isLoading }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isLoading in
+                self?.loadingView.isHidden = !isLoading
+                isLoading ? self?.loadingView.startAnimating() : self?.loadingView.stopAnimating()
+            }.disposed(by: disposeBag)
     }
     
     private func subviews() {
@@ -128,6 +142,7 @@ class ViewController: UIViewController, ReactorKit.View {
         self.view.addSubview(emptyView)
         self.emptyView.addSubview(noResultLabel)
         self.emptyView.addSubview(noResultKeywordLabel)
+        self.view.addSubview(loadingView)
     }
     
     private func setConstraints() {
@@ -167,6 +182,10 @@ class ViewController: UIViewController, ReactorKit.View {
         noResultKeywordLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(noResultLabel.snp.bottom).offset(10)
+        }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalTo(view)
         }
     }
     

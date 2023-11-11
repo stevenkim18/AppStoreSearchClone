@@ -23,6 +23,7 @@ final class SearchReactor: Reactor {
         case addAppInfo([AppInfoEntity])
         case setAppItem(AppInfoEntity)
         case setSearchResult(Bool, String)
+        case isLoading(Bool)
     }
     
     struct State {
@@ -30,6 +31,7 @@ final class SearchReactor: Reactor {
         var appinfos: [AppInfoEntity] = []
         @Pulse var selectedInfo: AppInfoEntity?
         var resultValue: (isResultCountZero: Bool, keyword: String) = (false, "")
+        var isLoading: Bool = false
 //        var isResultCountZero: Bool = false
     }
     
@@ -38,21 +40,24 @@ final class SearchReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case let .searchKeyboardClicked(keyword):
-            return fetchAppsInfos(keyword: keyword)
-                .flatMap {
-                    if $0.resultCount == 0 {
-                        return Observable.concat([
-                            Observable.just(Mutation.setSearchResult(true, keyword)),
-                            Observable.just(Mutation.addAppInfo([]))
-                        ])
-                    } else {
-                        return Observable.concat([
-                            Observable.just(Mutation.setSearchResult(false, keyword)),
-                            Observable.just(Mutation.addAppInfo($0.results))
-                        ])
-                    }
-                }
-                .catch { _ in .empty() }
+            return Observable.concat([
+                Observable.just(Mutation.isLoading(true)),
+                fetchAppsInfos(keyword: keyword)
+                    .flatMap {
+                        if $0.resultCount == 0 {
+                            return Observable.concat([
+                                Observable.just(Mutation.setSearchResult(true, keyword)),
+                                Observable.just(Mutation.addAppInfo([]))
+                            ])
+                        } else {
+                            return Observable.concat([
+                                Observable.just(Mutation.setSearchResult(false, keyword)),
+                                Observable.just(Mutation.addAppInfo($0.results))
+                            ])
+                        }
+                    }.catch { _ in .empty() },
+                Observable.just(Mutation.isLoading(false)),
+            ])
         case let.selectCell(row):
             let item = self.currentState.appinfos[row]
             return Observable.just(Mutation.setAppItem(item))
@@ -77,6 +82,10 @@ final class SearchReactor: Reactor {
         case let .setSearchResult(isResultCountZero, keyword):
             var newState = state
             newState.resultValue = (isResultCountZero, keyword)
+            return newState
+        case let .isLoading(isLoading):
+            var newState = state
+            newState.isLoading = isLoading
             return newState
         }
     }
