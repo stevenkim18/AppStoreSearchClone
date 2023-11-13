@@ -16,12 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let viewController = SearchViewController()
-        viewController.reactor = SearchViewReactor()
+        let viewController = AppRounter.search.viewController
 //        let testViewController = TestViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.prefersLargeTitles = true
-        window?.rootViewController = navigationController
+        window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         
     }

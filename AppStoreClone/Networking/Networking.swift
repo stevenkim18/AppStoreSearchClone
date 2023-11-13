@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-//import RxCocoa
 
 enum HomeApi {
     case fetchAppsInfo(String)
@@ -61,7 +60,11 @@ extension ApiError: CustomStringConvertible {
     }
 }
 
-struct Networking {
+protocol NetworkingProtocol {
+    func request<T>(_ targetType: ApiTargetType) -> Single<T> where T: Codable, T: Decodable
+}
+
+struct Networking: NetworkingProtocol {
     func request<T>(_ targetType: ApiTargetType) -> Single<T> where T: Codable, T: Decodable {
         guard let request = targetType.createCompmnents() else { return Single.error(ApiError.noResponse) }
 

@@ -14,7 +14,11 @@ protocol SearchRepositoryImpl {
 
 final class SearchRepository: SearchRepositoryImpl {
     
-    private let network = Networking()
+    private let network: NetworkingProtocol
+    
+    init(network: NetworkingProtocol) {
+        self.network = network
+    }
     
     func searchAppInfos(keyword: String) -> Observable<AppInfoResultEntity> {
         return network.request(HomeApi.fetchAppsInfo(keyword))

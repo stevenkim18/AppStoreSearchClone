@@ -11,7 +11,7 @@ import RxSwift
 
 final class SearchViewReactor: Reactor {
     
-    let usecase = SearchViewUsecase()
+    private let usecase: SearchViewUsecaseProtocol
     
     enum Action: Equatable {
         case searchKeyboardClicked(String)
@@ -36,6 +36,10 @@ final class SearchViewReactor: Reactor {
     }
     
     var initialState: State = State()
+    
+    init(usecase: SearchViewUsecaseProtocol) {
+        self.usecase = usecase
+    }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {

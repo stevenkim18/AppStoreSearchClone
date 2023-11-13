@@ -112,7 +112,7 @@ class SearchViewController: UIViewController, ReactorKit.View {
             .subscribe { [weak self] entity in
                 DispatchQueue.main.async {
                     self?.emptyView.isHidden = true
-                    let detailViewController = DetailViewController(appinfo: entity)
+                    let detailViewController = AppRounter.detail(appInfo: entity).viewController
                     self?.navigationController?.pushViewController(detailViewController, animated: true)
                 }
             }

@@ -12,7 +12,11 @@ protocol SearchViewUsecaseProtocol: AnyObject {
 }
 
 final class SearchViewUsecase: SearchViewUsecaseProtocol {
-    let repository = SearchRepository()
+    private let repository: SearchRepositoryImpl
+    
+    init(repository: SearchRepositoryImpl) {
+        self.repository = repository
+    }
     
     func searchAppInfos(keyword: String) -> Observable<AppInfoResultEntity> {
         return repository.searchAppInfos(keyword: keyword)
