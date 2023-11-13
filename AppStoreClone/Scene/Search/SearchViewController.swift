@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchViewController.swift
 //  AppStoreClone
 //
 //  Created by seungwooKim on 2023/10/30.

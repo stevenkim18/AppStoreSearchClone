@@ -11,7 +11,7 @@ import RxSwift
 
 final class SearchViewReactor: Reactor {
     
-    let network = Networking()
+    let usecase = SearchViewUsecase()
     
     enum Action: Equatable {
         case searchKeyboardClicked(String)
@@ -42,7 +42,7 @@ final class SearchViewReactor: Reactor {
         case let .searchKeyboardClicked(keyword):
             return Observable.concat([
                 Observable.just(Mutation.isLoading(true)),
-                fetchAppsInfos(keyword: keyword)
+                usecase.searchAppInfos(keyword: keyword)
                     .flatMap {
                         if $0.resultCount == 0 {
                             return Observable.concat([
@@ -90,11 +90,4 @@ final class SearchViewReactor: Reactor {
         }
     }
     
-}
-
-extension SearchViewReactor {
-    private func fetchAppsInfos(keyword: String) -> Observable<AppInfoResultEntity> {
-        return network.request(HomeApi.fetchAppsInfo(keyword))
-            .asObservable()
-    }
 }
