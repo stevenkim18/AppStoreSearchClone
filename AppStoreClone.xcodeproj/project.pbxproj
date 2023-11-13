@@ -17,7 +17,7 @@
 		C05EA62A2AFD4AB800CA9B9C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05EA6292AFD4AB800CA9B9C /* TestViewController.swift */; };
 		C0B59CFE2AEF802000150DE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59CFD2AEF802000150DE9 /* AppDelegate.swift */; };
 		C0B59D002AEF802000150DE9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59CFF2AEF802000150DE9 /* SceneDelegate.swift */; };
-		C0B59D022AEF802000150DE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D012AEF802000150DE9 /* ViewController.swift */; };
+		C0B59D022AEF802000150DE9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D012AEF802000150DE9 /* SearchViewController.swift */; };
 		C0B59D072AEF802100150DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0B59D062AEF802100150DE9 /* Assets.xcassets */; };
 		C0B59D0A2AEF802100150DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B59D082AEF802100150DE9 /* LaunchScreen.storyboard */; };
 		C0B59D152AEF802100150DE9 /* AppStoreCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D142AEF802100150DE9 /* AppStoreCloneTests.swift */; };
@@ -28,7 +28,7 @@
 		C0B59D352AF0FBF500150DE9 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D342AF0FBF500150DE9 /* RxCocoa */; };
 		C0B59D372AF0FBF500150DE9 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D362AF0FBF500150DE9 /* RxSwift */; };
 		C0B59D3A2AF0FBFF00150DE9 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D392AF0FBFF00150DE9 /* ReactorKit */; };
-		C0B59D3C2AF0FC2500150DE9 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */; };
+		C0B59D3C2AF0FC2500150DE9 /* SearchViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3B2AF0FC2500150DE9 /* SearchViewReactor.swift */; };
 		C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */; };
 		C0B59D402AF3782400150DE9 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3F2AF3782400150DE9 /* Networking.swift */; };
 		C0B59D422AF38F7F00150DE9 /* Entitys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D412AF38F7F00150DE9 /* Entitys.swift */; };
@@ -61,7 +61,7 @@
 		C0B59CFA2AEF802000150DE9 /* AppStoreClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B59CFD2AEF802000150DE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0B59CFF2AEF802000150DE9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C0B59D012AEF802000150DE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C0B59D012AEF802000150DE9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C0B59D062AEF802100150DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0B59D092AEF802100150DE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0B59D0B2AEF802100150DE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		C0B59D1A2AEF802100150DE9 /* AppStoreCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B59D1E2AEF802100150DE9 /* AppStoreCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITests.swift; sourceTree = "<group>"; };
 		C0B59D202AEF802100150DE9 /* AppStoreCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
+		C0B59D3B2AF0FC2500150DE9 /* SearchViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewReactor.swift; sourceTree = "<group>"; };
 		C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppListTableViewCell.swift; sourceTree = "<group>"; };
 		C0B59D3F2AF3782400150DE9 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		C0B59D412AF38F7F00150DE9 /* Entitys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entitys.swift; sourceTree = "<group>"; };
@@ -143,20 +143,10 @@
 		C0B59CFC2AEF802000150DE9 /* AppStoreClone */ = {
 			isa = PBXGroup;
 			children = (
-				C0B59CFD2AEF802000150DE9 /* AppDelegate.swift */,
-				C0B59CFF2AEF802000150DE9 /* SceneDelegate.swift */,
-				C0B59D012AEF802000150DE9 /* ViewController.swift */,
-				C0B59D062AEF802100150DE9 /* Assets.xcassets */,
-				C0B59D082AEF802100150DE9 /* LaunchScreen.storyboard */,
-				C0B59D0B2AEF802100150DE9 /* Info.plist */,
-				C0B59D3B2AF0FC2500150DE9 /* SearchReactor.swift */,
-				C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */,
-				C0B59D3F2AF3782400150DE9 /* Networking.swift */,
-				C0B59D412AF38F7F00150DE9 /* Entitys.swift */,
-				C0B59D432AF38FA500150DE9 /* ApiTargetType.swift */,
-				C05EA6252AFCB62D00CA9B9C /* DetailViewController.swift */,
-				C05EA6272AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift */,
-				C05EA6292AFD4AB800CA9B9C /* TestViewController.swift */,
+				C0F15E222B0204D30039FF71 /* SupportFiles */,
+				C0F15E282B0205600039FF71 /* Entitys */,
+				C0F15E262B0205410039FF71 /* Networking */,
+				C0F15E202B02048A0039FF71 /* Scene */,
 			);
 			path = AppStoreClone;
 			sourceTree = "<group>";
@@ -177,6 +167,88 @@
 				C0B59D202AEF802100150DE9 /* AppStoreCloneUITestsLaunchTests.swift */,
 			);
 			path = AppStoreCloneUITests;
+			sourceTree = "<group>";
+		};
+		C0F15E202B02048A0039FF71 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				C0F15E232B0205030039FF71 /* Detail */,
+				C0F15E212B0204B30039FF71 /* Search */,
+				C0F15E272B0205510039FF71 /* Test */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		C0F15E212B0204B30039FF71 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C0F15E242B0205150039FF71 /* Cell */,
+				C0B59D012AEF802000150DE9 /* SearchViewController.swift */,
+				C0B59D3B2AF0FC2500150DE9 /* SearchViewReactor.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C0F15E222B0204D30039FF71 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C0B59CFD2AEF802000150DE9 /* AppDelegate.swift */,
+				C0B59CFF2AEF802000150DE9 /* SceneDelegate.swift */,
+				C0B59D082AEF802100150DE9 /* LaunchScreen.storyboard */,
+				C0B59D062AEF802100150DE9 /* Assets.xcassets */,
+				C0B59D0B2AEF802100150DE9 /* Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		C0F15E232B0205030039FF71 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C0F15E252B0205290039FF71 /* Cell */,
+				C05EA6252AFCB62D00CA9B9C /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		C0F15E242B0205150039FF71 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C0F15E252B0205290039FF71 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C05EA6272AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		C0F15E262B0205410039FF71 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C0B59D3F2AF3782400150DE9 /* Networking.swift */,
+				C0B59D432AF38FA500150DE9 /* ApiTargetType.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		C0F15E272B0205510039FF71 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				C05EA6292AFD4AB800CA9B9C /* TestViewController.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		C0F15E282B0205600039FF71 /* Entitys */ = {
+			isa = PBXGroup;
+			children = (
+				C0B59D412AF38F7F00150DE9 /* Entitys.swift */,
+			);
+			path = Entitys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,12 +403,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C05EA6262AFCB62D00CA9B9C /* DetailViewController.swift in Sources */,
-				C0B59D3C2AF0FC2500150DE9 /* SearchReactor.swift in Sources */,
+				C0B59D3C2AF0FC2500150DE9 /* SearchViewReactor.swift in Sources */,
 				C05EA62A2AFD4AB800CA9B9C /* TestViewController.swift in Sources */,
 				C05EA6282AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift in Sources */,
 				C0B59D442AF38FA500150DE9 /* ApiTargetType.swift in Sources */,
 				C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */,
-				C0B59D022AEF802000150DE9 /* ViewController.swift in Sources */,
+				C0B59D022AEF802000150DE9 /* SearchViewController.swift in Sources */,
 				C0B59D402AF3782400150DE9 /* Networking.swift in Sources */,
 				C0B59CFE2AEF802000150DE9 /* AppDelegate.swift in Sources */,
 				C0B59D422AF38F7F00150DE9 /* Entitys.swift in Sources */,
@@ -512,7 +584,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U77SWC9NZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AppStoreClone/Info.plist;
+				INFOPLIST_FILE = AppStoreClone/SupportFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -540,7 +612,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U77SWC9NZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AppStoreClone/Info.plist;
+				INFOPLIST_FILE = AppStoreClone/SupportFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

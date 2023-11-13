@@ -9,7 +9,7 @@ import Foundation
 import ReactorKit
 import RxSwift
 
-final class SearchReactor: Reactor {
+final class SearchViewReactor: Reactor {
     
     let network = Networking()
     
@@ -92,7 +92,7 @@ final class SearchReactor: Reactor {
     
 }
 
-extension SearchReactor {
+extension SearchViewReactor {
     private func fetchAppsInfos(keyword: String) -> Observable<AppInfoResultEntity> {
         return network.request(HomeApi.fetchAppsInfo(keyword))
             .asObservable()

@@ -35,7 +35,7 @@ extension HomeApi: ApiTargetType {
             return ["term": keyword,
                     "entity": "software",
                     "country": "kr",
-                    "limit": 10]
+                    "limit": 1000]
         }
     }
 }

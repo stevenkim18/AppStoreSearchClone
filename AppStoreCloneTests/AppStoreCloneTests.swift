@@ -26,10 +26,10 @@ final class AppStoreCloneTests: XCTestCase {
         // Given
         let searchKeyword = "성경"
         
-        let reactor = SearchReactor()
+        let reactor = SearchViewReactor()
         reactor.isStubEnabled = true
         
-        let viewcontroller = ViewController()
+        let viewcontroller = SearchViewController()
         viewcontroller.reactor = reactor
         viewcontroller.searchController.searchBar.text = searchKeyword
         
@@ -41,7 +41,7 @@ final class AppStoreCloneTests: XCTestCase {
     }
     
     func test검색어입력액션이_전달되었을_때_실제_API가_호출되고_앱정보결과값이_넣어진다() {
-        let reactor = SearchReactor()
+        let reactor = SearchViewReactor()
         
         let disposeBag = DisposeBag()
         
@@ -61,10 +61,10 @@ final class AppStoreCloneTests: XCTestCase {
         // Given
         let appInfos: [AppInfoEntity] = [AppInfoEntity.mock()]
         
-        let reactor = SearchReactor()
+        let reactor = SearchViewReactor()
         reactor.isStubEnabled = true
         
-        let viewcontroller = ViewController()
+        let viewcontroller = SearchViewController()
         viewcontroller.reactor = reactor
         
         // When

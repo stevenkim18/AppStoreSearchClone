@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class ViewController: UIViewController, ReactorKit.View {
+class SearchViewController: UIViewController, ReactorKit.View {
     
     let tableview = UITableView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +79,7 @@ class ViewController: UIViewController, ReactorKit.View {
         rightbarImageView.isHidden = false
     }
     
-    func bind(reactor: SearchReactor) {
+    func bind(reactor: SearchViewReactor) {
         // Action
         searchController.searchBar.rx.searchButtonClicked
             .map { [weak self] _ in
@@ -191,7 +191,7 @@ class ViewController: UIViewController, ReactorKit.View {
     
 }
 
-extension ViewController: UITableViewDelegate {
+extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         352
     }

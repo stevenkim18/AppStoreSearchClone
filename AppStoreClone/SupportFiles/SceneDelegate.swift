@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let viewController = ViewController()
-        viewController.reactor = SearchReactor()
+        let viewController = SearchViewController()
+        viewController.reactor = SearchViewReactor()
 //        let testViewController = TestViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.prefersLargeTitles = true
