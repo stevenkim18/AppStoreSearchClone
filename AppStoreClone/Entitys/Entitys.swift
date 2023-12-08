@@ -12,7 +12,7 @@ struct AppInfoResultEntity: Codable {
     let results: [AppInfoEntity]
 }
 
-struct AppInfoEntity: Codable {
+struct AppInfoEntity: Codable, Hashable {
     let screenshotUrls: [String]    // 스샷 이미지 url
     let trackName: String           // 앱 이름
     let artistName: String          // 개발자 계정 이름

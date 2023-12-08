@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3838D3311BF18D9BC4D30AEF /* Pods_AppStoreCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8DE67DC03E735D564542FD /* Pods_AppStoreCloneTests.framework */; };
+		53EB3E41BF0D3440B24E6373 /* Pods_AppStoreClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A83C14F89A2D0E0C279FAF8 /* Pods_AppStoreClone.framework */; };
 		C0257DE02AF4D5100041BDAF /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DDF2AF4D5100041BDAF /* RxTest */; };
 		C0257DE22AF4D5150041BDAF /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DE12AF4D5150041BDAF /* RxSwift */; };
 		C0257DE42AF4E6A30041BDAF /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DE32AF4E6A30041BDAF /* RxCocoa */; };
@@ -37,6 +39,11 @@
 		C0F15E2A2B0206ED0039FF71 /* SearchViewUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E292B0206ED0039FF71 /* SearchViewUsecase.swift */; };
 		C0F15E2D2B02367A0039FF71 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E2C2B02367A0039FF71 /* SearchRepository.swift */; };
 		C0F15E312B024B870039FF71 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E302B024B870039FF71 /* AppRouter.swift */; };
+		C0F15E362B03D30C0039FF71 /* RxDataSourceTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E352B03D30C0039FF71 /* RxDataSourceTestViewController.swift */; };
+		C0F15E392B03DA330039FF71 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = C0F15E382B03DA330039FF71 /* RxDataSources */; };
+		C0F15E3B2B04A55C0039FF71 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E3A2B04A55C0039FF71 /* TestTableViewCell.swift */; };
+		C0FE03A12B21D5C000C11AA6 /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE03A02B21D5C000C11AA6 /* SearchSection.swift */; };
+		E81901919D61F427549F4429 /* Pods_AppStoreClone_AppStoreCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB8D4207A16A4D88A1B42A4 /* Pods_AppStoreClone_AppStoreCloneUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +64,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07F23F5E8D5CFE35D1E934A0 /* Pods-AppStoreClone-AppStoreCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreClone-AppStoreCloneUITests.debug.xcconfig"; path = "Target Support Files/Pods-AppStoreClone-AppStoreCloneUITests/Pods-AppStoreClone-AppStoreCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		110EAE8C611BE5921D4D3169 /* Pods-AppStoreClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreClone.release.xcconfig"; path = "Target Support Files/Pods-AppStoreClone/Pods-AppStoreClone.release.xcconfig"; sourceTree = "<group>"; };
+		3A83C14F89A2D0E0C279FAF8 /* Pods_AppStoreClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AB8D4207A16A4D88A1B42A4 /* Pods_AppStoreClone_AppStoreCloneUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreClone_AppStoreCloneUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7200D041E5C1A4527182AA67 /* Pods-AppStoreClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreClone.debug.xcconfig"; path = "Target Support Files/Pods-AppStoreClone/Pods-AppStoreClone.debug.xcconfig"; sourceTree = "<group>"; };
+		9A8DE67DC03E735D564542FD /* Pods_AppStoreCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4BFFA2630CC86C89D7D8618 /* Pods-AppStoreCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreCloneTests.debug.xcconfig"; path = "Target Support Files/Pods-AppStoreCloneTests/Pods-AppStoreCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA69F34666DE542A0044287F /* Pods-AppStoreClone-AppStoreCloneUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreClone-AppStoreCloneUITests.release.xcconfig"; path = "Target Support Files/Pods-AppStoreClone-AppStoreCloneUITests/Pods-AppStoreClone-AppStoreCloneUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C0257DE52AF60B8C0041BDAF /* AppInfoEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppInfoEntity+.swift"; sourceTree = "<group>"; };
 		C05EA6252AFCB62D00CA9B9C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C05EA6272AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -81,6 +96,10 @@
 		C0F15E292B0206ED0039FF71 /* SearchViewUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewUsecase.swift; sourceTree = "<group>"; };
 		C0F15E2C2B02367A0039FF71 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		C0F15E302B024B870039FF71 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		C0F15E352B03D30C0039FF71 /* RxDataSourceTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSourceTestViewController.swift; sourceTree = "<group>"; };
+		C0F15E3A2B04A55C0039FF71 /* TestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewCell.swift; sourceTree = "<group>"; };
+		C0FE03A02B21D5C000C11AA6 /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
+		E04A916183BC7B222596FDD4 /* Pods-AppStoreCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreCloneTests.release.xcconfig"; path = "Target Support Files/Pods-AppStoreCloneTests/Pods-AppStoreCloneTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +111,10 @@
 				C0B59D352AF0FBF500150DE9 /* RxCocoa in Frameworks */,
 				C0B59D2F2AEF8D3D00150DE9 /* SnapKit in Frameworks */,
 				C0B59D372AF0FBF500150DE9 /* RxSwift in Frameworks */,
+				C0F15E392B03DA330039FF71 /* RxDataSources in Frameworks */,
 				C0B59D3A2AF0FBFF00150DE9 /* ReactorKit in Frameworks */,
 				C0B59D322AEF8D4500150DE9 /* Then in Frameworks */,
+				53EB3E41BF0D3440B24E6373 /* Pods_AppStoreClone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +126,7 @@
 				C0257DE82AF632F70041BDAF /* RxBlocking in Frameworks */,
 				C0257DE22AF4D5150041BDAF /* RxSwift in Frameworks */,
 				C0257DE02AF4D5100041BDAF /* RxTest in Frameworks */,
+				3838D3311BF18D9BC4D30AEF /* Pods_AppStoreCloneTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81901919D61F427549F4429 /* Pods_AppStoreClone_AppStoreCloneUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +144,9 @@
 		C0257DDA2AF4D4CD0041BDAF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A83C14F89A2D0E0C279FAF8 /* Pods_AppStoreClone.framework */,
+				5AB8D4207A16A4D88A1B42A4 /* Pods_AppStoreClone_AppStoreCloneUITests.framework */,
+				9A8DE67DC03E735D564542FD /* Pods_AppStoreCloneTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,6 +159,7 @@
 				C0B59D1D2AEF802100150DE9 /* AppStoreCloneUITests */,
 				C0B59CFB2AEF802000150DE9 /* Products */,
 				C0257DDA2AF4D4CD0041BDAF /* Frameworks */,
+				DCDD7B3B03F5C8BAA8690883 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +221,7 @@
 				C0B59D012AEF802000150DE9 /* SearchViewController.swift */,
 				C0B59D3B2AF0FC2500150DE9 /* SearchViewReactor.swift */,
 				C0F15E292B0206ED0039FF71 /* SearchViewUsecase.swift */,
+				C0FE03A02B21D5C000C11AA6 /* SearchSection.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -248,6 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				C05EA6292AFD4AB800CA9B9C /* TestViewController.swift */,
+				C0F15E352B03D30C0039FF71 /* RxDataSourceTestViewController.swift */,
+				C0F15E3A2B04A55C0039FF71 /* TestTableViewCell.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -276,6 +306,20 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		DCDD7B3B03F5C8BAA8690883 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7200D041E5C1A4527182AA67 /* Pods-AppStoreClone.debug.xcconfig */,
+				110EAE8C611BE5921D4D3169 /* Pods-AppStoreClone.release.xcconfig */,
+				07F23F5E8D5CFE35D1E934A0 /* Pods-AppStoreClone-AppStoreCloneUITests.debug.xcconfig */,
+				AA69F34666DE542A0044287F /* Pods-AppStoreClone-AppStoreCloneUITests.release.xcconfig */,
+				A4BFFA2630CC86C89D7D8618 /* Pods-AppStoreCloneTests.debug.xcconfig */,
+				E04A916183BC7B222596FDD4 /* Pods-AppStoreCloneTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -283,9 +327,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0B59D242AEF802100150DE9 /* Build configuration list for PBXNativeTarget "AppStoreClone" */;
 			buildPhases = (
+				11F99CA99399B51E979DCF10 /* [CP] Check Pods Manifest.lock */,
 				C0B59CF62AEF802000150DE9 /* Sources */,
 				C0B59CF72AEF802000150DE9 /* Frameworks */,
 				C0B59CF82AEF802000150DE9 /* Resources */,
+				320D1C4A895330FD11D516AF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -299,6 +345,7 @@
 				C0B59D362AF0FBF500150DE9 /* RxSwift */,
 				C0B59D392AF0FBFF00150DE9 /* ReactorKit */,
 				C0F15E1E2AFE11460039FF71 /* Kingfisher */,
+				C0F15E382B03DA330039FF71 /* RxDataSources */,
 			);
 			productName = AppStoreClone;
 			productReference = C0B59CFA2AEF802000150DE9 /* AppStoreClone.app */;
@@ -308,6 +355,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0B59D272AEF802100150DE9 /* Build configuration list for PBXNativeTarget "AppStoreCloneTests" */;
 			buildPhases = (
+				6F5B8FB35A8312611624211F /* [CP] Check Pods Manifest.lock */,
 				C0B59D0C2AEF802100150DE9 /* Sources */,
 				C0B59D0D2AEF802100150DE9 /* Frameworks */,
 				C0B59D0E2AEF802100150DE9 /* Resources */,
@@ -332,9 +380,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0B59D2A2AEF802100150DE9 /* Build configuration list for PBXNativeTarget "AppStoreCloneUITests" */;
 			buildPhases = (
+				86F11FB7CB4B2E96B6DF71FE /* [CP] Check Pods Manifest.lock */,
 				C0B59D162AEF802100150DE9 /* Sources */,
 				C0B59D172AEF802100150DE9 /* Frameworks */,
 				C0B59D182AEF802100150DE9 /* Resources */,
+				CD86D220C6391FB744453D27 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -379,11 +429,12 @@
 			);
 			mainGroup = C0B59CF12AEF802000150DE9;
 			packageReferences = (
-				C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then" */,
-				C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit" */,
-				C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then.git" */,
+				C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */,
+				C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit.git" */,
+				C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+				C0F15E372B03DA330039FF71 /* XCRemoteSwiftPackageReference "RxDataSources.git" */,
 			);
 			productRefGroup = C0B59CFB2AEF802000150DE9 /* Products */;
 			projectDirPath = "";
@@ -422,6 +473,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		11F99CA99399B51E979DCF10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppStoreClone-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		320D1C4A895330FD11D516AF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppStoreClone/Pods-AppStoreClone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppStoreClone/Pods-AppStoreClone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppStoreClone/Pods-AppStoreClone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F5B8FB35A8312611624211F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppStoreCloneTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86F11FB7CB4B2E96B6DF71FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppStoreClone-AppStoreCloneUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD86D220C6391FB744453D27 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppStoreClone-AppStoreCloneUITests/Pods-AppStoreClone-AppStoreCloneUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppStoreClone-AppStoreCloneUITests/Pods-AppStoreClone-AppStoreCloneUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppStoreClone-AppStoreCloneUITests/Pods-AppStoreClone-AppStoreCloneUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C0B59CF62AEF802000150DE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -431,6 +585,8 @@
 				C05EA6262AFCB62D00CA9B9C /* DetailViewController.swift in Sources */,
 				C0B59D3C2AF0FC2500150DE9 /* SearchViewReactor.swift in Sources */,
 				C05EA62A2AFD4AB800CA9B9C /* TestViewController.swift in Sources */,
+				C0F15E362B03D30C0039FF71 /* RxDataSourceTestViewController.swift in Sources */,
+				C0F15E3B2B04A55C0039FF71 /* TestTableViewCell.swift in Sources */,
 				C0F15E312B024B870039FF71 /* AppRouter.swift in Sources */,
 				C05EA6282AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift in Sources */,
 				C0B59D442AF38FA500150DE9 /* ApiTargetType.swift in Sources */,
@@ -439,6 +595,7 @@
 				C0B59D022AEF802000150DE9 /* SearchViewController.swift in Sources */,
 				C0B59D402AF3782400150DE9 /* Networking.swift in Sources */,
 				C0B59CFE2AEF802000150DE9 /* AppDelegate.swift in Sources */,
+				C0FE03A12B21D5C000C11AA6 /* SearchSection.swift in Sources */,
 				C0B59D422AF38F7F00150DE9 /* Entitys.swift in Sources */,
 				C0B59D002AEF802000150DE9 /* SceneDelegate.swift in Sources */,
 			);
@@ -605,6 +762,7 @@
 		};
 		C0B59D252AEF802100150DE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7200D041E5C1A4527182AA67 /* Pods-AppStoreClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -633,6 +791,7 @@
 		};
 		C0B59D262AEF802100150DE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 110EAE8C611BE5921D4D3169 /* Pods-AppStoreClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -661,6 +820,7 @@
 		};
 		C0B59D282AEF802100150DE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4BFFA2630CC86C89D7D8618 /* Pods-AppStoreCloneTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -681,6 +841,7 @@
 		};
 		C0B59D292AEF802100150DE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E04A916183BC7B222596FDD4 /* Pods-AppStoreCloneTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -701,6 +862,7 @@
 		};
 		C0B59D2B2AEF802100150DE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07F23F5E8D5CFE35D1E934A0 /* Pods-AppStoreClone-AppStoreCloneUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -719,6 +881,7 @@
 		};
 		C0B59D2C2AEF802100150DE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA69F34666DE542A0044287F /* Pods-AppStoreClone-AppStoreCloneUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -777,7 +940,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -785,7 +948,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then" */ = {
+		C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
 			requirement = {
@@ -793,7 +956,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -801,7 +964,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
+		C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
 			requirement = {
@@ -809,7 +972,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -817,58 +980,71 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		C0F15E372B03DA330039FF71 /* XCRemoteSwiftPackageReference "RxDataSources.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		C0257DDF2AF4D5100041BDAF /* RxTest */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxTest;
 		};
 		C0257DE12AF4D5150041BDAF /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxSwift;
 		};
 		C0257DE32AF4E6A30041BDAF /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxCocoa;
 		};
 		C0257DE72AF632F70041BDAF /* RxBlocking */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxBlocking;
 		};
 		C0B59D2E2AEF8D3D00150DE9 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 		C0B59D312AEF8D4500150DE9 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then" */;
+			package = C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then.git" */;
 			productName = Then;
 		};
 		C0B59D342AF0FBF500150DE9 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxCocoa;
 		};
 		C0B59D362AF0FBF500150DE9 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxSwift;
 		};
 		C0B59D392AF0FBFF00150DE9 /* ReactorKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit" */;
+			package = C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit.git" */;
 			productName = ReactorKit;
 		};
 		C0F15E1E2AFE11460039FF71 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
 			productName = Kingfisher;
+		};
+		C0F15E382B03DA330039FF71 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0F15E372B03DA330039FF71 /* XCRemoteSwiftPackageReference "RxDataSources.git" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

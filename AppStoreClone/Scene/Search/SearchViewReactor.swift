@@ -14,6 +14,7 @@ final class SearchViewReactor: Reactor {
     private let usecase: SearchViewUsecaseProtocol
     
     enum Action: Equatable {
+        case searchKeywordChanged(String)
         case searchKeyboardClicked(String)
         case selectCell(Int)
     }
@@ -33,6 +34,7 @@ final class SearchViewReactor: Reactor {
         var resultValue: (isResultCountZero: Bool, keyword: String) = (false, "")
         var isLoading: Bool = false
 //        var isResultCountZero: Bool = false
+        var section: [SearchSection] = [.init(identity: .items, items: [])]
     }
     
     var initialState: State = State()
@@ -43,6 +45,9 @@ final class SearchViewReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
+        case let .searchKeywordChanged(keyword):
+            print(keyword)
+            return Observable.empty()
         case let .searchKeyboardClicked(keyword):
             return Observable.concat([
                 Observable.just(Mutation.isLoading(true)),
@@ -63,8 +68,12 @@ final class SearchViewReactor: Reactor {
                 Observable.just(Mutation.isLoading(false)),
             ])
         case let.selectCell(row):
-            let item = self.currentState.appinfos[row]
-            return Observable.just(Mutation.setAppItem(item))
+//            let item = self.currentState.appinfos[row]
+            let selectedItem = self.currentState.section[0].items[row]
+            switch selectedItem {
+            case let .searchItem(entity):
+                return Observable.just(Mutation.setAppItem(entity))
+            }            
         }
     }
     
@@ -74,10 +83,14 @@ final class SearchViewReactor: Reactor {
             var newState = state
             newState.recentKeywords.append(keyword)
             return newState
-        case let .addAppInfo(entity):
+        case let .addAppInfo(entitys):
             var newState = state
-            newState.selectedInfo = nil
-            newState.appinfos = entity
+//            newState.selectedInfo = nil
+//            newState.appinfos = entity
+            let items: [SearchSection.Item] = entitys.map { entity in
+                SearchSection.Item.searchItem(entity)
+            }
+            newState.section[0].items = items
             return newState
         case let .setAppItem(entity):
             var newState = state

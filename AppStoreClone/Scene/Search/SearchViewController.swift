@@ -11,6 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 import ReactorKit
+import RxDataSources
 
 class SearchViewController: UIViewController, ReactorKit.View {
     
@@ -48,6 +49,8 @@ class SearchViewController: UIViewController, ReactorKit.View {
     
     var items: [String] = []
     
+    lazy var datasoure = self.createDataSource()
+    
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -63,6 +66,8 @@ class SearchViewController: UIViewController, ReactorKit.View {
         subviews()
         setConstraints()
         
+        // TODO: ReuseableCell 적용해보기
+        // TODO: 검색어 변경시 최근 검색어 구현.
         tableview.register(AppListTableViewCell.self, forCellReuseIdentifier: "cell")
         tableview.rx.setDelegate(self)
             .disposed(by: disposeBag)
@@ -81,6 +86,11 @@ class SearchViewController: UIViewController, ReactorKit.View {
     
     func bind(reactor: SearchViewReactor) {
         // Action
+        searchController.searchBar.rx.text
+            .map { Reactor.Action.searchKeywordChanged($0 ?? "") }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
         searchController.searchBar.rx.searchButtonClicked
             .map { [weak self] _ in
                 guard let text = self?.searchController.searchBar.text else {
@@ -100,11 +110,17 @@ class SearchViewController: UIViewController, ReactorKit.View {
                 .disposed(by: disposeBag)
         
         // State
+//        reactor.state
+//            .map { $0.appinfos }
+//            // TODO: RxDataSource 공부 리펙토링 해보기
+//            .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: AppListTableViewCell.self)) { (indexPath, element, cell) in
+//                cell.configure(element)
+//            }
+//            .disposed(by: disposeBag)
         reactor.state
-            .map { $0.appinfos }
-            .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: AppListTableViewCell.self)) { (indexPath, element, cell) in
-                cell.configure(element)
-            }
+            .map { $0.section }
+            .distinctUntilChanged()
+            .bind(to: tableview.rx.items(dataSource: self.datasoure))
             .disposed(by: disposeBag)
         
         reactor.pulse(\.$selectedInfo)
@@ -194,5 +210,22 @@ class SearchViewController: UIViewController, ReactorKit.View {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         352
+    }
+}
+
+extension SearchViewController {
+    private func createDataSource() -> RxTableViewSectionedReloadDataSource<SearchSection> {
+        return .init(
+            configureCell: { _, tableview, indexPath, item in
+                guard let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AppListTableViewCell else {
+                    return UITableViewCell()
+                }
+                switch item {
+                case let .searchItem(entity):
+                    cell.configure(entity)
+                }
+                return cell
+            }
+        )
     }
 }
