@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 import RxDataSources
+import RxViewController
 
 class SearchViewController: UIViewController, ReactorKit.View {
     
@@ -69,8 +70,10 @@ class SearchViewController: UIViewController, ReactorKit.View {
         // TODO: ReuseableCell 적용해보기
         // TODO: 검색어 변경시 최근 검색어 구현.
         tableview.register(AppListTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell2")
         tableview.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        self.reactor?.action.onNext(.fetchRecentKeywords)
     }
     
     // TODO: RxViewController로 구현.
@@ -85,6 +88,14 @@ class SearchViewController: UIViewController, ReactorKit.View {
     }
     
     func bind(reactor: SearchViewReactor) {
+        
+//        self.rx.viewWillAppear
+//            .take(1)
+//            .map { _ in Reactor.Action.fetchRecentKeywords }
+//            .bind(to: reactor.action)  // SIGABORT 에러 남.
+//            .disposed(by: disposeBag)
+        
+
         // Action
         searchController.searchBar.rx.text
             .map { Reactor.Action.searchKeywordChanged($0 ?? "") }
@@ -103,12 +114,20 @@ class SearchViewController: UIViewController, ReactorKit.View {
             })
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
+                
+        searchController.searchBar.rx.cancelButtonClicked
+            .map { Reactor.Action.cancelButtonClicked }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
         
         tableview.rx.itemSelected
                 .map { Reactor.Action.selectCell($0.row) }
                 .bind(to: reactor.action)
                 .disposed(by: disposeBag)
         
+        self.datasoure.titleForHeaderInSection = { datasource, index in
+            return datasource.sectionModels[index].header
+        }
         // State
 //        reactor.state
 //            .map { $0.appinfos }
@@ -209,22 +228,31 @@ class SearchViewController: UIViewController, ReactorKit.View {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        352
+        switch self.datasoure[indexPath.section].identity {
+        case .items:
+            return 352
+        case .keyword:
+            return 48
+        }
     }
 }
 
 extension SearchViewController {
     private func createDataSource() -> RxTableViewSectionedReloadDataSource<SearchSection> {
         return .init(
-            configureCell: { _, tableview, indexPath, item in
-                guard let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AppListTableViewCell else {
-                    return UITableViewCell()
-                }
-                switch item {
+            configureCell: { _, tableview, indexPath, sectionItem in
+                switch sectionItem {
                 case let .searchItem(entity):
+                    guard let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AppListTableViewCell else {
+                        return UITableViewCell()
+                    }
                     cell.configure(entity)
+                    return cell
+                case let .recentKeyword(keyword):
+                    let cell = tableview.dequeueReusableCell(withIdentifier: "cell2", for: indexPath)
+                    cell.textLabel?.text = keyword
+                    return cell
                 }
-                return cell
             }
         )
     }

@@ -8,28 +8,27 @@
 import RxDataSources
 
 struct SearchSection: Hashable {
-    enum Identity: String {
-        case items
+    enum Identity: Int {
+        case items = 0
+        case keyword = 1
     }
+    var header: String
     var identity: Identity
     var items: [Item]
 }
 
 extension SearchSection: SectionModelType {
-//    typealias Item = AppInfoEntity
-    
-//    init(original: Self, items: [Item]) {
-//        self = original
-//        self.items = items
-//    }
     init(original: Self, items: [Item]) {
-        self = SearchSection(identity: original.identity, items: items)
+        self = original
+        self.items = items
+//        self = SearchSection(header: "", identity: original.identity, items: items)
     }
 }
 
 extension SearchSection {
     enum Item: Hashable {
         case searchItem(AppInfoEntity)
+        case recentKeyword(String)
     }
 }
 

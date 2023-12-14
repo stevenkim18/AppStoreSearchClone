@@ -25,8 +25,10 @@ extension AppRounter {
 
 private func searchBuilder() -> UIViewController {
     let network = Networking()
-    let repository = SearchRepository(network: network)
-    let usecase = SearchViewUsecase(repository: repository)
+    let userDefaults = UserDefaultsUtilImpl()
+    let searchRepository = SearchRepositoryImpl(network: network)
+    let keywordRepository = KeywordRepositoryImpl(userDefaults: userDefaults)
+    let usecase = SearchViewUsecase(searchRepository: searchRepository, keywordRepository: keywordRepository)
     let reactor = SearchViewReactor(usecase: usecase)
     let viewController = SearchViewController()
     viewController.reactor = reactor

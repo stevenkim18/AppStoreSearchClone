@@ -8,11 +8,11 @@
 import Foundation
 import RxSwift
 
-protocol SearchRepositoryImpl {
+protocol SearchRepository {
     func searchAppInfos(keyword: String) -> Observable<AppInfoResultEntity>
 }
 
-final class SearchRepository: SearchRepositoryImpl {
+final class SearchRepositoryImpl: SearchRepository {
     
     private let network: NetworkingProtocol
     
