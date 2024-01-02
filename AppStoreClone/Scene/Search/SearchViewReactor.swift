@@ -49,8 +49,8 @@ final class SearchViewReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case let .searchKeywordChanged(keyword):
-            print(keyword)
-            return Observable.empty()
+            let filteredKeywords = usecase.filterMatchedKeyword(keyword)
+            return Observable.just(Mutation.setRecentKeywords(filteredKeywords))
         case let .searchKeyboardClicked(keyword):
             usecase.addKeyword(keyword)
             return Observable.concat([
@@ -72,8 +72,7 @@ final class SearchViewReactor: Reactor {
                 Observable.just(Mutation.isLoading(false)),
             ])
         case .cancelButtonClicked, .fetchRecentKeywords:
-            var keywords = usecase.fetchKeyword()
-            keywords.append(contentsOf: ["가나다", "마바사", "아자차", "타파하"])
+            let keywords = usecase.fetchKeyword()
             return Observable.just(Mutation.setRecentKeywords(keywords))
         case let.selectCell(row):
 //            let item = self.currentState.appinfos[row]

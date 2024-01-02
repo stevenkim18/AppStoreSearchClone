@@ -238,8 +238,9 @@ extension SearchViewController: UITableViewDelegate {
 }
 
 extension SearchViewController {
-    private func createDataSource() -> RxTableViewSectionedReloadDataSource<SearchSection> {
+    private func createDataSource() -> RxTableViewSectionedAnimatedDataSource<SearchSection> {
         return .init(
+            animationConfiguration: AnimationConfiguration(reloadAnimation: .automatic),
             configureCell: { _, tableview, indexPath, sectionItem in
                 switch sectionItem {
                 case let .searchItem(entity):

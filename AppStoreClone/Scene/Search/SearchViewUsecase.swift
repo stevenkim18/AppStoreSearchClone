@@ -12,6 +12,7 @@ protocol SearchViewUsecaseProtocol: AnyObject {
     func searchAppInfos(keyword: String) -> Observable<AppInfoResultEntity>
     func addKeyword(_ keyword: String)
     func fetchKeyword() -> [String]
+    func filterMatchedKeyword(_ searchedKeyword: String) -> [String]
 }
 
 final class SearchViewUsecase: SearchViewUsecaseProtocol {
@@ -33,5 +34,11 @@ final class SearchViewUsecase: SearchViewUsecaseProtocol {
     
     func fetchKeyword() -> [String] {
         return keywordRepository.fetchKeywords()
+    }
+    
+    func filterMatchedKeyword(_ searchedKeyword: String) -> [String] {
+        let keywords = fetchKeyword()
+        if searchedKeyword.isEmpty { return keywords }
+        return keywords.filter { $0.contains(searchedKeyword) }
     }
 }

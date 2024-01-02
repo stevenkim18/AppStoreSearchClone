@@ -17,7 +17,7 @@ struct SearchSection: Hashable {
     var items: [Item]
 }
 
-extension SearchSection: SectionModelType {
+extension SearchSection: AnimatableSectionModelType {
     init(original: Self, items: [Item]) {
         self = original
         self.items = items
