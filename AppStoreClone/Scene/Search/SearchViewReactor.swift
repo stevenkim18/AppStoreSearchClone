@@ -22,22 +22,23 @@ final class SearchViewReactor: Reactor {
     }
     
     enum Mutation {
-        case addKeyword(String)         // 로컬 디비에 최근 검색어 저장
+        case addKeyword(String)
         case addAppInfo([AppInfoEntity])
         case setAppItem(AppInfoEntity)
         case setSearchResult(Bool, String)
         case setRecentKeywords([String])
         case isLoading(Bool)
+        case setRecentKeyword(String)
     }
     
     struct State {
-        var recentKeywords: [String] = [] // 검색어 로컬 db로 부터 불러와야 함.
+        var recentKeywords: [String] = []
         var appinfos: [AppInfoEntity] = []
         @Pulse var selectedInfo: AppInfoEntity?
         var resultValue: (isResultCountZero: Bool, keyword: String) = (false, "")
         var isLoading: Bool = false
-//        var isResultCountZero: Bool = false
         var section: [SearchSection] = [.init(header: "", identity: .items, items: [])]
+        var selectedRecentKeyword: String = ""
     }
     
     var initialState: State = State()
@@ -71,17 +72,22 @@ final class SearchViewReactor: Reactor {
                     }.catch { _ in .empty() },
                 Observable.just(Mutation.isLoading(false)),
             ])
-        case .cancelButtonClicked, .fetchRecentKeywords:
+        case .cancelButtonClicked:
+            let keywords = usecase.fetchKeyword()
+            return Observable.concat([
+                Observable.just(Mutation.setSearchResult(false, "")),
+                Observable.just(Mutation.setRecentKeywords(keywords))
+            ])
+        case .fetchRecentKeywords:
             let keywords = usecase.fetchKeyword()
             return Observable.just(Mutation.setRecentKeywords(keywords))
         case let.selectCell(row):
-//            let item = self.currentState.appinfos[row]
             let selectedItem = self.currentState.section[0].items[row]
             switch selectedItem {
             case let .searchItem(entity):
                 return Observable.just(Mutation.setAppItem(entity))
-            case .recentKeyword:
-                return Observable.empty()
+            case let .recentKeyword(text):
+                return Observable.just(Mutation.setRecentKeyword(text))
             }
         }
     }
@@ -94,8 +100,6 @@ final class SearchViewReactor: Reactor {
             return newState
         case let .addAppInfo(entitys):
             var newState = state
-//            newState.selectedInfo = nil
-//            newState.appinfos = entity
             let items: [SearchSection.Item] = entitys.map { entity in
                 SearchSection.Item.searchItem(entity)
             }
@@ -121,6 +125,10 @@ final class SearchViewReactor: Reactor {
         case let .isLoading(isLoading):
             var newState = state
             newState.isLoading = isLoading
+            return newState
+        case let .setRecentKeyword(keyword):
+            var newState = state
+            newState.selectedRecentKeyword = keyword
             return newState
         }
     }

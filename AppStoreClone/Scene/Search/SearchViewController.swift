@@ -68,7 +68,6 @@ class SearchViewController: UIViewController, ReactorKit.View {
         setConstraints()
         
         // TODO: ReuseableCell 적용해보기
-        // TODO: 검색어 변경시 최근 검색어 구현.
         tableview.register(AppListTableViewCell.self, forCellReuseIdentifier: "cell")
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell2")
         tableview.rx.setDelegate(self)
@@ -109,9 +108,6 @@ class SearchViewController: UIViewController, ReactorKit.View {
                 }
                 return Reactor.Action.searchKeyboardClicked(text)
             }
-            .do(onNext: { [weak self] _ in
-                self?.searchController.searchBar.text = ""
-            })
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
                 
@@ -128,14 +124,8 @@ class SearchViewController: UIViewController, ReactorKit.View {
         self.datasoure.titleForHeaderInSection = { datasource, index in
             return datasource.sectionModels[index].header
         }
+        
         // State
-//        reactor.state
-//            .map { $0.appinfos }
-//            // TODO: RxDataSource 공부 리펙토링 해보기
-//            .bind(to: tableview.rx.items(cellIdentifier: "cell", cellType: AppListTableViewCell.self)) { (indexPath, element, cell) in
-//                cell.configure(element)
-//            }
-//            .disposed(by: disposeBag)
         reactor.state
             .map { $0.section }
             .distinctUntilChanged()
@@ -169,11 +159,22 @@ class SearchViewController: UIViewController, ReactorKit.View {
                 self?.loadingView.isHidden = !isLoading
                 isLoading ? self?.loadingView.startAnimating() : self?.loadingView.stopAnimating()
             }.disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.selectedRecentKeyword }
+            .filter { $0.isEmpty == false }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] selectedKeyword in
+                self?.searchController.searchBar.becomeFirstResponder()
+                self?.searchController.searchBar.text = selectedKeyword
+                self?.reactor?.action.onNext(.searchKeyboardClicked(selectedKeyword))
+                self?.searchController.searchBar.resignFirstResponder()
+            }.disposed(by: disposeBag)
     }
     
     private func subviews() {
         self.view.addSubview(tableview)
-        
         self.view.addSubview(emptyView)
         self.emptyView.addSubview(noResultLabel)
         self.emptyView.addSubview(noResultKeywordLabel)
