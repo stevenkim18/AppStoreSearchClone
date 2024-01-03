@@ -9,11 +9,7 @@
 /* Begin PBXBuildFile section */
 		3838D3311BF18D9BC4D30AEF /* Pods_AppStoreCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8DE67DC03E735D564542FD /* Pods_AppStoreCloneTests.framework */; };
 		53EB3E41BF0D3440B24E6373 /* Pods_AppStoreClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A83C14F89A2D0E0C279FAF8 /* Pods_AppStoreClone.framework */; };
-		C0257DE02AF4D5100041BDAF /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DDF2AF4D5100041BDAF /* RxTest */; };
-		C0257DE22AF4D5150041BDAF /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DE12AF4D5150041BDAF /* RxSwift */; };
-		C0257DE42AF4E6A30041BDAF /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DE32AF4E6A30041BDAF /* RxCocoa */; };
 		C0257DE62AF60B8C0041BDAF /* AppInfoEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0257DE52AF60B8C0041BDAF /* AppInfoEntity+.swift */; };
-		C0257DE82AF632F70041BDAF /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = C0257DE72AF632F70041BDAF /* RxBlocking */; };
 		C05EA6262AFCB62D00CA9B9C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05EA6252AFCB62D00CA9B9C /* DetailViewController.swift */; };
 		C05EA6282AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05EA6272AFD0AF200CA9B9C /* ScreenShotCollectionViewCell.swift */; };
 		C05EA62A2AFD4AB800CA9B9C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05EA6292AFD4AB800CA9B9C /* TestViewController.swift */; };
@@ -27,22 +23,15 @@
 		C0B59D152AEF802100150DE9 /* AppStoreCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D142AEF802100150DE9 /* AppStoreCloneTests.swift */; };
 		C0B59D1F2AEF802100150DE9 /* AppStoreCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D1E2AEF802100150DE9 /* AppStoreCloneUITests.swift */; };
 		C0B59D212AEF802100150DE9 /* AppStoreCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D202AEF802100150DE9 /* AppStoreCloneUITestsLaunchTests.swift */; };
-		C0B59D2F2AEF8D3D00150DE9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D2E2AEF8D3D00150DE9 /* SnapKit */; };
-		C0B59D322AEF8D4500150DE9 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D312AEF8D4500150DE9 /* Then */; };
-		C0B59D352AF0FBF500150DE9 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D342AF0FBF500150DE9 /* RxCocoa */; };
-		C0B59D372AF0FBF500150DE9 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D362AF0FBF500150DE9 /* RxSwift */; };
-		C0B59D3A2AF0FBFF00150DE9 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = C0B59D392AF0FBFF00150DE9 /* ReactorKit */; };
 		C0B59D3C2AF0FC2500150DE9 /* SearchViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3B2AF0FC2500150DE9 /* SearchViewReactor.swift */; };
 		C0B59D3E2AF2BAB500150DE9 /* AppListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3D2AF2BAB500150DE9 /* AppListTableViewCell.swift */; };
 		C0B59D402AF3782400150DE9 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D3F2AF3782400150DE9 /* Networking.swift */; };
 		C0B59D422AF38F7F00150DE9 /* Entitys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D412AF38F7F00150DE9 /* Entitys.swift */; };
 		C0B59D442AF38FA500150DE9 /* ApiTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B59D432AF38FA500150DE9 /* ApiTargetType.swift */; };
-		C0F15E1F2AFE11460039FF71 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C0F15E1E2AFE11460039FF71 /* Kingfisher */; };
 		C0F15E2A2B0206ED0039FF71 /* SearchViewUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E292B0206ED0039FF71 /* SearchViewUsecase.swift */; };
 		C0F15E2D2B02367A0039FF71 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E2C2B02367A0039FF71 /* SearchRepository.swift */; };
 		C0F15E312B024B870039FF71 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E302B024B870039FF71 /* AppRouter.swift */; };
 		C0F15E362B03D30C0039FF71 /* RxDataSourceTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E352B03D30C0039FF71 /* RxDataSourceTestViewController.swift */; };
-		C0F15E392B03DA330039FF71 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = C0F15E382B03DA330039FF71 /* RxDataSources */; };
 		C0F15E3B2B04A55C0039FF71 /* TestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F15E3A2B04A55C0039FF71 /* TestTableViewCell.swift */; };
 		C0FE03A12B21D5C000C11AA6 /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE03A02B21D5C000C11AA6 /* SearchSection.swift */; };
 		E81901919D61F427549F4429 /* Pods_AppStoreClone_AppStoreCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB8D4207A16A4D88A1B42A4 /* Pods_AppStoreClone_AppStoreCloneUITests.framework */; };
@@ -111,13 +100,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0F15E1F2AFE11460039FF71 /* Kingfisher in Frameworks */,
-				C0B59D352AF0FBF500150DE9 /* RxCocoa in Frameworks */,
-				C0B59D2F2AEF8D3D00150DE9 /* SnapKit in Frameworks */,
-				C0B59D372AF0FBF500150DE9 /* RxSwift in Frameworks */,
-				C0F15E392B03DA330039FF71 /* RxDataSources in Frameworks */,
-				C0B59D3A2AF0FBFF00150DE9 /* ReactorKit in Frameworks */,
-				C0B59D322AEF8D4500150DE9 /* Then in Frameworks */,
 				53EB3E41BF0D3440B24E6373 /* Pods_AppStoreClone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,10 +108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0257DE42AF4E6A30041BDAF /* RxCocoa in Frameworks */,
-				C0257DE82AF632F70041BDAF /* RxBlocking in Frameworks */,
-				C0257DE22AF4D5150041BDAF /* RxSwift in Frameworks */,
-				C0257DE02AF4D5100041BDAF /* RxTest in Frameworks */,
 				3838D3311BF18D9BC4D30AEF /* Pods_AppStoreCloneTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,13 +330,6 @@
 			);
 			name = AppStoreClone;
 			packageProductDependencies = (
-				C0B59D2E2AEF8D3D00150DE9 /* SnapKit */,
-				C0B59D312AEF8D4500150DE9 /* Then */,
-				C0B59D342AF0FBF500150DE9 /* RxCocoa */,
-				C0B59D362AF0FBF500150DE9 /* RxSwift */,
-				C0B59D392AF0FBFF00150DE9 /* ReactorKit */,
-				C0F15E1E2AFE11460039FF71 /* Kingfisher */,
-				C0F15E382B03DA330039FF71 /* RxDataSources */,
 			);
 			productName = AppStoreClone;
 			productReference = C0B59CFA2AEF802000150DE9 /* AppStoreClone.app */;
@@ -380,10 +351,6 @@
 			);
 			name = AppStoreCloneTests;
 			packageProductDependencies = (
-				C0257DDF2AF4D5100041BDAF /* RxTest */,
-				C0257DE12AF4D5150041BDAF /* RxSwift */,
-				C0257DE32AF4E6A30041BDAF /* RxCocoa */,
-				C0257DE72AF632F70041BDAF /* RxBlocking */,
 			);
 			productName = AppStoreCloneTests;
 			productReference = C0B59D102AEF802100150DE9 /* AppStoreCloneTests.xctest */;
@@ -442,12 +409,6 @@
 			);
 			mainGroup = C0B59CF12AEF802000150DE9;
 			packageReferences = (
-				C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then" */,
-				C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit" */,
-				C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				C0F15E372B03DA330039FF71 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = C0B59CFB2AEF802000150DE9 /* Products */;
 			projectDirPath = "";
@@ -953,115 +914,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devxoul/Then.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-		C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactorKit/ReactorKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-		C0F15E372B03DA330039FF71 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C0257DDF2AF4D5100041BDAF /* RxTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
-		};
-		C0257DE12AF4D5150041BDAF /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		C0257DE32AF4E6A30041BDAF /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		C0257DE72AF632F70041BDAF /* RxBlocking */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxBlocking;
-		};
-		C0B59D2E2AEF8D3D00150DE9 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D2D2AEF8D3D00150DE9 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		C0B59D312AEF8D4500150DE9 /* Then */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D302AEF8D4500150DE9 /* XCRemoteSwiftPackageReference "Then" */;
-			productName = Then;
-		};
-		C0B59D342AF0FBF500150DE9 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		C0B59D362AF0FBF500150DE9 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D332AF0FBF500150DE9 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		C0B59D392AF0FBFF00150DE9 /* ReactorKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0B59D382AF0FBFF00150DE9 /* XCRemoteSwiftPackageReference "ReactorKit" */;
-			productName = ReactorKit;
-		};
-		C0F15E1E2AFE11460039FF71 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0F15E1D2AFE11460039FF71 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		C0F15E382B03DA330039FF71 /* RxDataSources */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0F15E372B03DA330039FF71 /* XCRemoteSwiftPackageReference "RxDataSources" */;
-			productName = RxDataSources;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0B59CF22AEF802000150DE9 /* Project object */;
 }
