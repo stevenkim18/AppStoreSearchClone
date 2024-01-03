@@ -11,6 +11,11 @@ import RxSwift
 
 final class SearchViewReactor: Reactor {
     
+    private enum Constants {
+        static let blank = ""
+        static let recentKeywordHeaderTitle = "최근 검색어"
+    }
+    
     private let usecase: SearchViewUsecaseProtocol
     
     enum Action: Equatable {
@@ -35,10 +40,10 @@ final class SearchViewReactor: Reactor {
         var recentKeywords: [String] = []
         var appinfos: [AppInfoEntity] = []
         @Pulse var selectedInfo: AppInfoEntity?
-        var resultValue: (isResultCountZero: Bool, keyword: String) = (false, "")
+        var resultValue: (isResultCountZero: Bool, keyword: String) = (false, Constants.blank)
         var isLoading: Bool = false
-        var section: [SearchSection] = [.init(header: "", identity: .items, items: [])]
-        var selectedRecentKeyword: String = ""
+        var section: [SearchSection] = [.init(header: Constants.blank, identity: .items, items: [])]
+        var selectedRecentKeyword: String = Constants.blank
     }
     
     var initialState: State = State()
@@ -75,7 +80,7 @@ final class SearchViewReactor: Reactor {
         case .cancelButtonClicked:
             let keywords = usecase.fetchKeyword()
             return Observable.concat([
-                Observable.just(Mutation.setSearchResult(false, "")),
+                Observable.just(Mutation.setSearchResult(false, Constants.blank)),
                 Observable.just(Mutation.setRecentKeywords(keywords))
             ])
         case .fetchRecentKeywords:
@@ -103,7 +108,7 @@ final class SearchViewReactor: Reactor {
             let items: [SearchSection.Item] = entitys.map { entity in
                 SearchSection.Item.searchItem(entity)
             }
-            let section: SearchSection = .init(header: "", identity: .items, items: items)
+            let section: SearchSection = .init(header: Constants.blank, identity: .items, items: items)
             newState.section[0] = section
             return newState
         case let .setAppItem(entity):
@@ -119,7 +124,7 @@ final class SearchViewReactor: Reactor {
             let items: [SearchSection.Item] = keywords.map { keyword in
                 SearchSection.Item.recentKeyword(keyword)
             }
-            let section: SearchSection = .init(header: "최근 검색어", identity: .keyword, items: items)
+            let section: SearchSection = .init(header: Constants.recentKeywordHeaderTitle, identity: .keyword, items: items)
             newState.section[0] = section
             return newState
         case let .isLoading(isLoading):

@@ -16,17 +16,25 @@ import RxViewController
 
 class SearchViewController: UIViewController, ReactorKit.View {
     
+    // MARK: Constants
+    private enum Constants {
+        static let title = "검색"
+        static let defaultProfileImageName = "person.circle"
+        static let searchbarPlaceHolder = "게임, 앱, 스토리 등 "
+        static let noResultText = "결과 없음"
+    }
+    
     let tableview = UITableView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let rightbarImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "person.circle")
+        $0.image = UIImage(systemName: Constants.defaultProfileImageName)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let searchController = UISearchController(searchResultsController: nil).then {
-        $0.searchBar.placeholder = "게임, 앱, 스토리 등 "
+        $0.searchBar.placeholder = Constants.searchbarPlaceHolder
     }
     
     let emptyView = UIView().then {
@@ -34,7 +42,7 @@ class SearchViewController: UIViewController, ReactorKit.View {
     }
     
     let noResultLabel = UILabel().then {
-        $0.text = "결과 없음"
+        $0.text = Constants.noResultText
         $0.font = UIFont.systemFont(ofSize: 30, weight: .bold)
     }
     
@@ -59,7 +67,7 @@ class SearchViewController: UIViewController, ReactorKit.View {
         
         view.backgroundColor = .systemBackground
         
-        self.navigationItem.title = "검색"
+        self.navigationItem.title = Constants.title
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
