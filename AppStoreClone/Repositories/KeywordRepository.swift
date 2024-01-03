@@ -26,7 +26,7 @@ final class KeywordRepositoryImpl: KeywordRepository {
     func addKeyword(_ keyword: String) {
         var currentKeywords = fetchKeywords()
         currentKeywords.insert(keyword, at: 0)
-        let uniqueKeywords = Set(currentKeywords)
+        let uniqueKeywords = NSOrderedSet(array: currentKeywords).map { $0 as! String }
         userDefaults.setKeywords(Array(uniqueKeywords))
     }
 }
