@@ -220,7 +220,7 @@ class DetailViewController: UIViewController {
     }
     
     private func configure() {
-        iconImageView.load(url: URL.init(string: appinfo.artworkUrl512)! )
+        iconImageView.kf.setImage(with: URL.init(string: appinfo.artworkUrl512)! )
         titleLabel.text = appinfo.trackName
         developerLabel.text = appinfo.artistName
         descriptionLabel.text = appinfo.description

@@ -39,7 +39,7 @@ final class SearchViewReactor: Reactor {
     struct State {
         var recentKeywords: [String] = []
         var appinfos: [AppInfoEntity] = []
-        @Pulse var selectedInfo: AppInfoEntity?
+        @Pulse var selectedAppInfo: AppInfoEntity?
         var resultValue: (isResultCountZero: Bool, keyword: String) = (false, Constants.blank)
         var isLoading: Bool = false
         var section: [SearchSection] = [.init(header: Constants.blank, identity: .items, items: [])]
@@ -113,7 +113,7 @@ final class SearchViewReactor: Reactor {
             return newState
         case let .setAppItem(entity):
             var newState = state
-            newState.selectedInfo = entity
+            newState.selectedAppInfo = entity
             return newState
         case let .setSearchResult(isResultCountZero, keyword):
             var newState = state

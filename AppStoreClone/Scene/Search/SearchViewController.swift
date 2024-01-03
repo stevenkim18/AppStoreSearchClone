@@ -13,8 +13,14 @@ import RxCocoa
 import ReactorKit
 import RxDataSources
 import RxViewController
+import ReusableKit
 
 class SearchViewController: UIViewController, ReactorKit.View {
+    
+    enum Reusable {
+        static let keywordCell = ReusableCell<UITableViewCell>()
+        static let appInfoCell = ReusableCell<AppListTableViewCell>()
+    }
     
     // MARK: Constants
     private enum Constants {
@@ -24,13 +30,14 @@ class SearchViewController: UIViewController, ReactorKit.View {
         static let noResultText = "결과 없음"
     }
     
-    let tableview = UITableView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
+    // MARK: UI Properties
+    lazy var tableview = UITableView().then {
+        $0.register(Reusable.keywordCell)
+        $0.register(Reusable.appInfoCell)
     }
     
     let rightbarImageView = UIImageView().then {
         $0.image = UIImage(systemName: Constants.defaultProfileImageName)
-        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     let searchController = UISearchController(searchResultsController: nil).then {
@@ -56,34 +63,34 @@ class SearchViewController: UIViewController, ReactorKit.View {
         $0.backgroundColor = .gray
     }
     
-    var items: [String] = []
-    
     lazy var datasoure = self.createDataSource()
     
     var disposeBag = DisposeBag()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .systemBackground
-        
-        self.navigationItem.title = Constants.title
-        
-        self.navigationItem.searchController = searchController
-        self.navigationItem.hidesSearchBarWhenScrolling = false
-        
-        subviews()
-        setConstraints()
-        
-        // TODO: ReuseableCell 적용해보기
-        tableview.register(AppListTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell2")
-        tableview.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-        self.reactor?.action.onNext(.fetchRecentKeywords)
+    // MARK: Initializing
+    init(reactor: SearchViewReactor) {
+        defer {
+            self.reactor = reactor
+        }
+        super.init(nibName: nil, bundle: nil)
     }
     
-    // TODO: RxViewController로 구현.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: View Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        setNavigationItem()
+        configureUI()
+        setConstraints()
+        
+        tableview.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         rightbarImageView.isHidden = true
@@ -94,94 +101,7 @@ class SearchViewController: UIViewController, ReactorKit.View {
         rightbarImageView.isHidden = false
     }
     
-    func bind(reactor: SearchViewReactor) {
-        
-//        self.rx.viewWillAppear
-//            .take(1)
-//            .map { _ in Reactor.Action.fetchRecentKeywords }
-//            .bind(to: reactor.action)  // SIGABORT 에러 남.
-//            .disposed(by: disposeBag)
-        
-
-        // Action
-        searchController.searchBar.rx.text
-            .map { Reactor.Action.searchKeywordChanged($0 ?? "") }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        searchController.searchBar.rx.searchButtonClicked
-            .map { [weak self] _ in
-                guard let text = self?.searchController.searchBar.text else {
-                    return Reactor.Action.searchKeyboardClicked("")
-                }
-                return Reactor.Action.searchKeyboardClicked(text)
-            }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-                
-        searchController.searchBar.rx.cancelButtonClicked
-            .map { Reactor.Action.cancelButtonClicked }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        tableview.rx.itemSelected
-                .map { Reactor.Action.selectCell($0.row) }
-                .bind(to: reactor.action)
-                .disposed(by: disposeBag)
-        
-        self.datasoure.titleForHeaderInSection = { datasource, index in
-            return datasource.sectionModels[index].header
-        }
-        
-        // State
-        reactor.state
-            .map { $0.section }
-            .distinctUntilChanged()
-            .bind(to: tableview.rx.items(dataSource: self.datasoure))
-            .disposed(by: disposeBag)
-        
-        reactor.pulse(\.$selectedInfo)
-            .compactMap{ $0 }
-            .subscribe { [weak self] entity in
-                DispatchQueue.main.async {
-                    self?.emptyView.isHidden = true
-                    let detailViewController = AppRounter.detail(appInfo: entity).viewController
-                    self?.navigationController?.pushViewController(detailViewController, animated: true)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        reactor.state
-            .map{ $0.resultValue }
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] isResultCountZero, keyword in
-                self?.noResultKeywordLabel.text = "'\(keyword)'"
-                self?.emptyView.isHidden = !isResultCountZero
-            }.disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.isLoading }
-            .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] isLoading in
-                self?.loadingView.isHidden = !isLoading
-                isLoading ? self?.loadingView.startAnimating() : self?.loadingView.stopAnimating()
-            }.disposed(by: disposeBag)
-        
-        reactor.state
-            .map { $0.selectedRecentKeyword }
-            .filter { $0.isEmpty == false }
-            .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] selectedKeyword in
-                self?.searchController.searchBar.becomeFirstResponder()
-                self?.searchController.searchBar.text = selectedKeyword
-                self?.reactor?.action.onNext(.searchKeyboardClicked(selectedKeyword))
-                self?.searchController.searchBar.resignFirstResponder()
-            }.disposed(by: disposeBag)
-    }
-    
-    private func subviews() {
+    private func configureUI() {
         self.view.addSubview(tableview)
         self.view.addSubview(emptyView)
         self.emptyView.addSubview(noResultLabel)
@@ -189,30 +109,19 @@ class SearchViewController: UIViewController, ReactorKit.View {
         self.view.addSubview(loadingView)
     }
     
+    private func setNavigationItem() {
+        self.navigationItem.title = Constants.title
+        
+        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     private func setConstraints() {
+        
+        setNavigationContraint()
         
         tableview.snp.makeConstraints {
             $0.top.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
-        }
-        
-        // navigationBar LargeTitle right view
-        guard let navigationBar = self.navigationController?.navigationBar else { return }
-        
-        guard let UINavigationBarLargeTitleView = NSClassFromString("_UINavigationBarLargeTitleView") else {
-            return
-        }
-        
-        for view in navigationBar.subviews {
-            if view.isKind(of: UINavigationBarLargeTitleView.self) {
-                view.addSubview(rightbarImageView)
-                rightbarImageView.snp.makeConstraints { make in
-                    make.bottom.equalTo(view.snp.bottom).inset(10)
-                    make.trailing.equalTo(view.snp.trailing).inset(view.directionalLayoutMargins.trailing)
-                    make.width.equalTo(rightbarImageView.snp.height)
-                    make.height.equalTo(40)
-                }
-                break
-            }
         }
         
         emptyView.snp.makeConstraints {
@@ -233,6 +142,158 @@ class SearchViewController: UIViewController, ReactorKit.View {
         }
     }
     
+    private func setNavigationContraint() {
+        // navigationBar LargeTitle right view
+        guard let navigationBar = self.navigationController?.navigationBar else { return }
+        
+        guard let UINavigationBarLargeTitleView = NSClassFromString("_UINavigationBarLargeTitleView") else {
+            return
+        }
+        
+        for view in navigationBar.subviews {
+            if view.isKind(of: UINavigationBarLargeTitleView.self) {
+                view.addSubview(rightbarImageView)
+                rightbarImageView.snp.makeConstraints { make in
+                    make.bottom.equalTo(view.snp.bottom).inset(10)
+                    make.trailing.equalTo(view.snp.trailing).inset(view.directionalLayoutMargins.trailing)
+                    make.width.equalTo(rightbarImageView.snp.height)
+                    make.height.equalTo(40)
+                }
+                break
+            }
+        }
+    }
+}
+
+// MARK: ReactorBind
+extension SearchViewController {
+    func bind(reactor: SearchViewReactor) {
+        setFetchRecentKeyword(reactor: reactor)
+        bindSearchBarText(reactor: reactor)
+        bindSearchBarSearchButton(reactor: reactor)
+        bindSearchBarCancelButton(reactor: reactor)
+        bindTableViewItem(reactor: reactor)
+        bindTableViewHeader(reactor: reactor)
+        bindSection(reactor: reactor)
+        bindSelectedAppInfo(reactor: reactor)
+        bindSelectedAppInfo(reactor: reactor)
+        bindResultValue(reactor: reactor)
+        bindSelectedRecentKeyword(reactor: reactor)
+    }
+}
+
+// MARK: Action
+extension SearchViewController {
+    private func setFetchRecentKeyword(reactor: SearchViewReactor) {
+        self.rx.viewWillAppear
+            .take(1)
+            .map { _ in Reactor.Action.fetchRecentKeywords }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindSearchBarText(reactor: SearchViewReactor) {
+        searchController.searchBar.rx.text
+            .filter { $0 != nil }
+            .filter { $0!.isEmpty == false }
+            .map { Reactor.Action.searchKeywordChanged($0 ?? "") }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindSearchBarSearchButton(reactor: SearchViewReactor) {
+        searchController.searchBar.rx.searchButtonClicked
+            .map { [weak self] _ in
+                guard let text = self?.searchController.searchBar.text else {
+                    return Reactor.Action.searchKeyboardClicked("")
+                }
+                return Reactor.Action.searchKeyboardClicked(text)
+            }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindSearchBarCancelButton(reactor: SearchViewReactor) {
+        searchController.searchBar.rx.cancelButtonClicked
+            .map { Reactor.Action.cancelButtonClicked }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindTableViewItem(reactor: SearchViewReactor) {
+        tableview.rx.itemSelected
+            .do(onNext: { [weak self] item in
+                self?.tableview.deselectRow(at: IndexPath(row: item.row, section: 0), animated: false)
+            })
+            .map { Reactor.Action.selectCell($0.row) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: State
+extension SearchViewController {
+    private func bindTableViewHeader(reactor: SearchViewReactor) {
+        self.datasoure.titleForHeaderInSection = { datasource, index in
+            return datasource.sectionModels[index].header
+        }
+    }
+    
+    private func bindSection(reactor: SearchViewReactor) {
+        reactor.state
+            .map { $0.section }
+            .distinctUntilChanged()
+            .bind(to: tableview.rx.items(dataSource: self.datasoure))
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindSelectedAppInfo(reactor: SearchViewReactor) {
+        reactor.pulse(\.$selectedAppInfo)
+            .compactMap{ $0 }
+            .subscribe { [weak self] entity in
+                DispatchQueue.main.async {
+                    self?.emptyView.isHidden = true
+                    let detailViewController = AppRounter.detail(appInfo: entity).viewController
+                    self?.navigationController?.pushViewController(detailViewController, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindResultValue(reactor: SearchViewReactor) {
+        reactor.state
+            .map{ $0.resultValue }
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isResultCountZero, keyword in
+                self?.noResultKeywordLabel.text = "'\(keyword)'"
+                self?.emptyView.isHidden = !isResultCountZero
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindIsLoading(reactor: SearchViewReactor) {
+        reactor.state
+            .map { $0.isLoading }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isLoading in
+                self?.loadingView.isHidden = !isLoading
+                isLoading ? self?.loadingView.startAnimating() : self?.loadingView.stopAnimating()
+            }.disposed(by: disposeBag)
+    }
+    
+    private func bindSelectedRecentKeyword(reactor: SearchViewReactor) {
+        reactor.state
+            .map { $0.selectedRecentKeyword }
+            .filter { $0.isEmpty == false }
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] selectedKeyword in
+                self?.searchController.searchBar.becomeFirstResponder()
+                self?.searchController.searchBar.text = selectedKeyword
+                self?.reactor?.action.onNext(.searchKeyboardClicked(selectedKeyword))
+                self?.searchController.searchBar.resignFirstResponder()
+            }.disposed(by: disposeBag)
+    }
 }
 
 extension SearchViewController: UITableViewDelegate {
@@ -253,13 +314,12 @@ extension SearchViewController {
             configureCell: { _, tableview, indexPath, sectionItem in
                 switch sectionItem {
                 case let .searchItem(entity):
-                    guard let cell = tableview.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AppListTableViewCell else {
-                        return UITableViewCell()
-                    }
+                    let cell = tableview.dequeue(Reusable.appInfoCell, for: indexPath)
                     cell.configure(entity)
                     return cell
                 case let .recentKeyword(keyword):
-                    let cell = tableview.dequeueReusableCell(withIdentifier: "cell2", for: indexPath)
+                    let cell = tableview.dequeue(Reusable.keywordCell, for: indexPath)
+                    // TODO: custon Cell로 변경
                     cell.textLabel?.text = keyword
                     return cell
                 }

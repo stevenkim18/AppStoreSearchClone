@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import Kingfisher
 
 class ScreenShotCollectionViewCell: UICollectionViewCell {
     
@@ -39,6 +40,6 @@ class ScreenShotCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(imageUrl: String) {
-        screenImageView.load(url: URL(string: imageUrl)!)
+        screenImageView.kf.setImage(with: URL(string: imageUrl)!)
     }
 }
