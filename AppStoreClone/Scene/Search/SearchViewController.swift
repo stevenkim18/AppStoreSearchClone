@@ -18,7 +18,7 @@ import ReusableKit
 class SearchViewController: UIViewController, ReactorKit.View {
     
     enum Reusable {
-        static let keywordCell = ReusableCell<UITableViewCell>()
+        static let keywordCell = ReusableCell<RecentKeywordTableViewCell>()
         static let appInfoCell = ReusableCell<AppListTableViewCell>()
     }
     
@@ -302,7 +302,7 @@ extension SearchViewController: UITableViewDelegate {
         case .items:
             return 352
         case .keyword:
-            return 48
+            return 40
         }
     }
 }
@@ -319,8 +319,7 @@ extension SearchViewController {
                     return cell
                 case let .recentKeyword(keyword):
                     let cell = tableview.dequeue(Reusable.keywordCell, for: indexPath)
-                    // TODO: custon Cell로 변경
-                    cell.textLabel?.text = keyword
+                    cell.configure(keyword)
                     return cell
                 }
             }
