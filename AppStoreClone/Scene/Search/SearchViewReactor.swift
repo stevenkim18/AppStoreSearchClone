@@ -10,7 +10,7 @@ import ReactorKit
 import RxSwift
 
 final class SearchViewReactor: Reactor {
-    
+    // MARK: Constants
     private enum Constants {
         static let blank = ""
         static let recentKeywordHeaderTitle = "최근 검색어"

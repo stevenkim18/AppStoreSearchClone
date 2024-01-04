@@ -12,8 +12,15 @@ import Kingfisher
 
 // TODO: Cell에도 리엑터 만들어 보기
 class AppListTableViewCell: UITableViewCell {
+    // MARK: Constants
+    private enum Constants {
+        static let downloadButtonText = "받기"
+        static let iconSize = 62
+        static let iconMargin = 22
+        static let screenShotViewMargin = 20
+        static let screenShotViewHeight = 228
+    }
     
-    // TODO: 상수 분리
     let iconImageView = UIImageView(frame: .zero).then {
         $0.layer.cornerRadius = 14
         $0.layer.masksToBounds = true
@@ -21,22 +28,19 @@ class AppListTableViewCell: UITableViewCell {
     let titleLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 17)
         $0.textColor = .black
-        $0.text = "보라 성경"
     }
     let subtitleLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13)
-        $0.textColor = UIColor.init(red: 138/256, green: 138/256, blue: 141/256, alpha: 1)
-        $0.text = "라이프 스타일"
+        $0.textColor = UIColor(r: 138, g: 138, b: 141)
     }
     let rateView = UIView()
     let rateLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 13)
-        $0.textColor = UIColor.init(red: 196/256, green: 196/256, blue: 198/256, alpha: 1)
-        $0.text = "5"
+        $0.textColor = UIColor(r: 196, g: 196, b: 198)
     }
     
     let downloadButton = UIButton().then {
-        var title = AttributedString("받기")
+        var title = AttributedString(Constants.downloadButtonText)
         title.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         var configuration = UIButton.Configuration.gray()
         configuration.attributedTitle = title
@@ -104,10 +108,10 @@ class AppListTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         iconImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(22)
-            $0.left.equalToSuperview().offset(22)
-            $0.width.equalTo(62)
-            $0.height.equalTo(62)
+            $0.top.equalToSuperview().offset(Constants.iconMargin)
+            $0.left.equalToSuperview().offset(Constants.iconMargin)
+            $0.width.equalTo(Constants.iconSize)
+            $0.height.equalTo(Constants.iconSize)
         }
         
         titleLabel.snp.makeConstraints {
@@ -134,11 +138,22 @@ class AppListTableViewCell: UITableViewCell {
         }
         
         appImageStackView.snp.makeConstraints {
-            $0.top.equalTo(iconImageView.snp.bottom).offset(20)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalToSuperview().offset(-20)
+            $0.top.equalTo(iconImageView.snp.bottom).offset(Constants.screenShotViewMargin)
+            $0.left.equalToSuperview().offset(Constants.screenShotViewMargin)
+            $0.right.equalToSuperview().offset(-Constants.screenShotViewMargin)
+            $0.height.equalTo(Constants.screenShotViewHeight)
         }
+    }
+}
+
+// MARK: Cell Height
+extension AppListTableViewCell {
+    class func height() -> CGFloat {
+        return CGFloat(Constants.iconMargin +
+                       Constants.iconSize +
+                       Constants.screenShotViewMargin +
+                       Constants.screenShotViewHeight +
+                       Constants.screenShotViewMargin)
     }
 }
 

@@ -8,10 +8,23 @@
 import UIKit
 import Then
 import SnapKit
+import ReusableKit
 
 class DetailViewController: UIViewController {
+    enum Reusable {
+        static let screenShotCell = ReusableCell<ScreenShotCollectionViewCell>()
+    }
     
-    // TODO: 상수 분리
+    private enum Constants {
+        static let screenShotImageWidth = 270
+        static let screenShotImageHeight = 480
+        static let screenShotImageMargin = 10
+        static let screenShotSize = CGSize(width: screenShotImageWidth,
+                                           height: screenShotImageHeight)
+        static let shareButtonImageName = "square.and.arrow.up"
+        static let downloadButtonText = "받기"
+        static let moreButtonText = "더보기"
+    }
     
     let scrollview = UIScrollView()
     
@@ -32,11 +45,11 @@ class DetailViewController: UIViewController {
     // 회사 이름
     let developerLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 15)
-        $0.textColor = UIColor.init(red: 138/255, green: 138/255, blue: 138/255, alpha: 1)
+        $0.textColor = UIColor(r: 138, g: 138, b: 138)
     }
     // 다운로드 버튼
     let downloadButton = UIButton().then {
-        var title = AttributedString("받기")
+        var title = AttributedString(Constants.downloadButtonText)
         title.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         var configuration = UIButton.Configuration.filled()
         configuration.attributedTitle = title
@@ -48,7 +61,7 @@ class DetailViewController: UIViewController {
     // 공유 버튼
     let shareButton = UIButton().then {
         var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(systemName: "square.and.arrow.up")
+        configuration.image = UIImage(systemName: Constants.shareButtonImageName)
         
         $0.configuration = configuration
     }
@@ -59,7 +72,7 @@ class DetailViewController: UIViewController {
     let screenShotCollectionView = UICollectionView(frame: .zero,
                                                     collectionViewLayout: UICollectionViewFlowLayout().then({
         $0.scrollDirection = .horizontal
-        $0.itemSize = CGSize(width: 270, height: 480)
+        $0.itemSize = Constants.screenShotSize
     })).then {
         $0.backgroundColor = .clear
         $0.isScrollEnabled = true
@@ -68,6 +81,7 @@ class DetailViewController: UIViewController {
         $0.contentInset = UIEdgeInsets(top: 0, left: 19, bottom: 0, right: 19)
         $0.isPagingEnabled = false
         $0.decelerationRate = .fast
+        $0.register(Reusable.screenShotCell)
     }
     
     let screenShotView = UIView()
@@ -80,7 +94,7 @@ class DetailViewController: UIViewController {
     
     // 더보기
     let descriptionMoreButton = UIButton(configuration: .plain()).then {
-        $0.setTitle("더보기", for: .normal)
+        $0.setTitle(Constants.moreButtonText, for: .normal)
     }
     
     let bottomView = UIView()
@@ -99,8 +113,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        subviews()
+        configureUI()
         setContraints()
+        setCollectionView()
+        setMoreButtonAction()
         configure()
     }
     
@@ -114,7 +130,12 @@ class DetailViewController: UIViewController {
         self.navigationItem.largeTitleDisplayMode = .always
     }
     
-    private func subviews() {
+    private func setCollectionView() {
+        screenShotCollectionView.dataSource = self
+        screenShotCollectionView.delegate = self
+    }
+    
+    private func configureUI() {
         view.addSubview(scrollview)
         scrollview.addSubview(stackview)
         
@@ -135,12 +156,9 @@ class DetailViewController: UIViewController {
         [descriptionLabel, descriptionMoreButton].forEach {
             bottomView.addSubview($0)
         }
-
-        screenShotCollectionView.register(ScreenShotCollectionViewCell.self,
-                                          forCellWithReuseIdentifier: "ScreenShotCollectionViewCell")
-        screenShotCollectionView.dataSource = self
-        screenShotCollectionView.delegate = self
-        
+    }
+    
+    private func setMoreButtonAction() {
         descriptionMoreButton.addAction(UIAction(handler: { _ in
             // TODO: 실제 앱스토어 애니메이션 처럼
             UIView.animate(withDuration: 0.6, animations: {
@@ -236,9 +254,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ScreenShotCollectionViewCell", for: indexPath) as? ScreenShotCollectionViewCell else {
-            return UICollectionViewCell()
-        }
+        let cell = collectionView.dequeue(Reusable.screenShotCell, for: indexPath)
         let imageUrl = appinfo.screenshotUrls[indexPath.row]
         cell.configure(imageUrl: imageUrl)
         return cell
@@ -247,12 +263,11 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
-    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
-        let cellWidth = CGFloat(270 + 10)
+        let cellWidth = CGFloat(Constants.screenShotImageWidth + Constants.screenShotImageMargin)
         let index = round(scrolledOffsetX / cellWidth)
         targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
     }

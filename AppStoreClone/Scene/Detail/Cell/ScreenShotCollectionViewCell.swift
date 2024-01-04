@@ -11,7 +11,6 @@ import SnapKit
 import Kingfisher
 
 class ScreenShotCollectionViewCell: UICollectionViewCell {
-    
     let screenImageView = UIImageView().then {
         $0.layer.cornerRadius = 22
         $0.layer.masksToBounds = true
@@ -19,8 +18,7 @@ class ScreenShotCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        subviews()
+        configureUI()
         setContraints()
     }
     
@@ -28,11 +26,10 @@ class ScreenShotCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func subviews() {
+    private func configureUI() {
         self.contentView.addSubview(screenImageView)
     }
     
-    //
     private func setContraints() {
         screenImageView.snp.makeConstraints {
             $0.top.left.right.bottom.equalToSuperview()

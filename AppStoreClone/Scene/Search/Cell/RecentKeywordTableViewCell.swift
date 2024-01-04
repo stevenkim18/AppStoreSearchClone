@@ -10,9 +10,16 @@ import Then
 import SnapKit
 
 class RecentKeywordTableViewCell: UITableViewCell {
+    // MARK: Constants
+    private enum Constants {
+        static let searchIconImageName = "magnifyingglass"
+        static let iconImageSize = 16
+        static let iconImageMargin = 16
+        static let titleMargin = 12
+    }
     
     let iconImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "magnifyingglass")
+        $0.image = UIImage(systemName: Constants.searchIconImageName)
         $0.tintColor = .lightGray
     }
     
@@ -51,9 +58,18 @@ class RecentKeywordTableViewCell: UITableViewCell {
         }
         
         titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Constants.titleMargin)
             $0.left.equalTo(iconImageView.snp.right).offset(8)
-            $0.centerY.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-Constants.titleMargin)
         }
     }
-    
+}
+
+extension RecentKeywordTableViewCell {
+    class func height() -> CGFloat {
+        let titleHeight = Int(UIFont.systemFont(ofSize: 14).lineHeight)
+        return CGFloat(Constants.titleMargin +
+                       titleHeight +
+                       Constants.titleMargin)
+    }
 }

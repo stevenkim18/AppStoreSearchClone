@@ -16,7 +16,6 @@ import RxViewController
 import ReusableKit
 
 class SearchViewController: UIViewController, ReactorKit.View {
-    
     enum Reusable {
         static let keywordCell = ReusableCell<RecentKeywordTableViewCell>()
         static let appInfoCell = ReusableCell<AppListTableViewCell>()
@@ -296,13 +295,14 @@ extension SearchViewController {
     }
 }
 
+// MARK: Func
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch self.datasoure[indexPath.section].identity {
         case .items:
-            return 352
+            return Reusable.appInfoCell.class.height()
         case .keyword:
-            return 40
+            return Reusable.keywordCell.class.height()
         }
     }
 }

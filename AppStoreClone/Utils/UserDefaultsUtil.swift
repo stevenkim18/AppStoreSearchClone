@@ -13,7 +13,6 @@ protocol UserDefaultsUtil {
 }
 
 class UserDefaultsUtilImpl: UserDefaultsUtil {
-    
     private let userDefaults = UserDefaults.standard
     
     func getKeywords() -> [String] {

@@ -21,7 +21,6 @@ extension SearchSection: AnimatableSectionModelType {
     init(original: Self, items: [Item]) {
         self = original
         self.items = items
-//        self = SearchSection(header: "", identity: original.identity, items: items)
     }
 }
 
