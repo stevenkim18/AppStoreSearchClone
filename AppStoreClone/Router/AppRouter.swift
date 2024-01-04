@@ -30,8 +30,7 @@ private func searchBuilder() -> UIViewController {
     let keywordRepository = KeywordRepositoryImpl(userDefaults: userDefaults)
     let usecase = SearchViewUsecase(searchRepository: searchRepository, keywordRepository: keywordRepository)
     let reactor = SearchViewReactor(usecase: usecase)
-    let viewController = SearchViewController()
-    viewController.reactor = reactor
+    let viewController = SearchViewController(reactor: reactor)
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.prefersLargeTitles = true
     return navigationController

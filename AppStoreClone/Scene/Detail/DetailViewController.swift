@@ -11,6 +11,8 @@ import SnapKit
 
 class DetailViewController: UIViewController {
     
+    // TODO: 상수 분리
+    
     let scrollview = UIScrollView()
     
     let stackview = UIStackView().then {

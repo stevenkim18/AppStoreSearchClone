@@ -175,7 +175,7 @@ extension SearchViewController {
         bindTableViewItem(reactor: reactor)
         bindTableViewHeader(reactor: reactor)
         bindSection(reactor: reactor)
-        bindSelectedAppInfo(reactor: reactor)
+        bindIsLoading(reactor: reactor)
         bindSelectedAppInfo(reactor: reactor)
         bindResultValue(reactor: reactor)
         bindSelectedRecentKeyword(reactor: reactor)
@@ -310,7 +310,7 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController {
     private func createDataSource() -> RxTableViewSectionedAnimatedDataSource<SearchSection> {
         return .init(
-            animationConfiguration: AnimationConfiguration(reloadAnimation: .automatic),
+            animationConfiguration: AnimationConfiguration(reloadAnimation: .none),
             configureCell: { _, tableview, indexPath, sectionItem in
                 switch sectionItem {
                 case let .searchItem(entity):

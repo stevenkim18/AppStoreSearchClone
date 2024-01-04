@@ -13,6 +13,7 @@ import Kingfisher
 // TODO: Cell에도 리엑터 만들어 보기
 class AppListTableViewCell: UITableViewCell {
     
+    // TODO: 상수 분리
     let iconImageView = UIImageView(frame: .zero).then {
         $0.layer.cornerRadius = 14
         $0.layer.masksToBounds = true
