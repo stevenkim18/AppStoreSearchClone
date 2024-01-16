@@ -3,25 +3,25 @@
 “Apple AppStore의 검색 부분”을 클론한 프로젝트 입니다. 최신 버전의 앱과는 동작이 상이한 부분이 있습니다.
 
 # 목차
-[사용 기술](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#사용-기술)<br>
+[사용 기술](https://github.com/stevenkim18/AppStoreSearchClone/#사용-기술)<br>
 
-[구현 기능 소개](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#구현-기능-소개)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[앱 검색 및 앱 상세 화면](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#앱-검색-및-앱-상세-화면)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[최근 검색어 기능](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#최근-검색어-기능)<br>
+[구현 기능 소개](https://github.com/stevenkim18/AppStoreSearchClone/#구현-기능-소개)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[앱 검색 및 앱 상세 화면](https://github.com/stevenkim18/AppStoreSearchClone/#앱-검색-및-앱-상세-화면)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[최근 검색어 기능](https://github.com/stevenkim18/AppStoreSearchClone/#최근-검색어-기능)<br>
 
-[앱 구조](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#앱-구조)<br>
+[앱 구조](https://github.com/stevenkim18/AppStoreSearchClone/#앱-구조)<br>
 
-[고민한 점](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#고민한-점)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[2개의 TableView를 사용해서 각각 구현 VS 2개의 Cell을 1개의 TableView에 구현](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#2개의-tableview를-사용해서-각각-구현-vs-2개의-cell을-1개의-tableview에-구현)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[앱의 의존성 관리를 어떻게 할 것인가?](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#앱의-의존성-관리를-어떻게-할-것인가)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[UseCase의 역할은 무엇인가?](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#usecase의-역할은-무엇인가)<br>
+[고민한 점](https://github.com/stevenkim18/AppStoreSearchClone/#고민한-점)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[2개의 TableView를 사용해서 각각 구현 VS 2개의 Cell을 1개의 TableView에 구현](https://github.com/stevenkim18/AppStoreSearchClone/#2개의-tableview를-사용해서-각각-구현-vs-2개의-cell을-1개의-tableview에-구현)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[앱의 의존성 관리를 어떻게 할 것인가?](https://github.com/stevenkim18/AppStoreSearchClone/#앱의-의존성-관리를-어떻게-할-것인가)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[UseCase의 역할은 무엇인가?](https://github.com/stevenkim18/AppStoreSearchClone/#usecase의-역할은-무엇인가)<br>
 
-[트러블 슈팅](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#트러블-슈팅)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[네비게이션 바 타이틀에 오른쪽에 있는 프로필 영역이 스크롤시에 실제 앱스토어와 똑같이 동작하게 만들기](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#네비게이션-바-타이틀에-오른쪽에-있는-프로필-영역이-스크롤시에-실제-앱스토어와-똑같이-동작하게-만들기)<Br>
+[트러블 슈팅](https://github.com/stevenkim18/AppStoreSearchClone/#트러블-슈팅)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[네비게이션 바 타이틀에 오른쪽에 있는 프로필 영역이 스크롤시에 실제 앱스토어와 똑같이 동작하게 만들기](https://github.com/stevenkim18/AppStoreSearchClone/#네비게이션-바-타이틀에-오른쪽에-있는-프로필-영역이-스크롤시에-실제-앱스토어와-똑같이-동작하게-만들기)<Br>
 
-[기술적 의사 결정](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#기술적-의사-결정)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[ReactorKit](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#reactorkit)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[RxDatasource](https://github.com/stevenkim18/AppStoreSearchClone/tree/master#rxdatasource)<Br><br>
+[기술적 의사 결정](https://github.com/stevenkim18/AppStoreSearchClone/#기술적-의사-결정)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ReactorKit](https://github.com/stevenkim18/AppStoreSearchClone/#reactorkit)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[RxDatasource](https://github.com/stevenkim18/AppStoreSearchClone/#rxdatasource)<Br><br>
 
 
 # 사용 기술
