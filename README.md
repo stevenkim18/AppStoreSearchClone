@@ -1,35 +1,37 @@
 # AppStoreSearch Clone
 
-“Apple AppStore의 검색 부분”을 클론한 프로젝트 입니다. 최신 버전의 앱과는 동작이 상이한 부분이 있습니다.
+“AppStore의 검색 부분”을 클론한 프로젝트 입니다. 최신 버전의 앱과는 동작이 상이한 부분이 있습니다.
 
 # 목차
-[사용 기술](https://github.com/stevenkim18/AppStoreSearchClone/#사용-기술)<br>
+- [사용 기술](https://github.com/stevenkim18/AppStoreSearchClone/#사용-기술)
+- [구현 기능 소개](https://github.com/stevenkim18/AppStoreSearchClone/#구현-기능-소개)
+	- [앱 검색 및 앱 상세 화면](https://github.com/stevenkim18/AppStoreSearchClone/#앱-검색-및-앱-상세-화면)
+	- [최근 검색어 기능](https://github.com/stevenkim18/AppStoreSearchClone/#최근-검색어-기능)
+- [앱 구조](https://github.com/stevenkim18/AppStoreSearchClone/#앱-구조)
+- [고민한 점](https://github.com/stevenkim18/AppStoreSearchClone/#고민한-점)
+	- [2개의 TableView를 사용해서 각각 구현 VS 2개의 Cell을 1개의 TableView에 구현](https://github.com/stevenkim18/AppStoreSearchClone/#2개의-tableview를-사용해서-각각-구현-vs-2개의-cell을-1개의-tableview에-구현)
+	- [앱의 의존성 관리를 어떻게 할 것인가?](https://github.com/stevenkim18/AppStoreSearchClone/#앱의-의존성-관리를-어떻게-할-것인가)
+	- [UseCase의 역할은 무엇인가?](https://github.com/stevenkim18/AppStoreSearchClone/#usecase의-역할은-무엇인가)
+- [트러블 슈팅](https://github.com/stevenkim18/AppStoreSearchClone/#트러블-슈팅)
+	- [네비게이션 바 타이틀에 오른쪽에 있는 프로필 영역이 스크롤시에 실제 앱스토어와 똑같이 동작하게 만들기](https://github.com/stevenkim18/AppStoreSearchClone/#네비게이션-바-타이틀에-오른쪽에-있는-프로필-영역이-스크롤시에-실제-앱스토어와-똑같이-동작하게-만들기)
+- [기술적 의사 결정](https://github.com/stevenkim18/AppStoreSearchClone/#기술적-의사-결정)
+	- [ReactorKit](https://github.com/stevenkim18/AppStoreSearchClone/#reactorkit)
+	- [RxDatasource](https://github.com/stevenkim18/AppStoreSearchClone/#rxdatasource)
 
-[구현 기능 소개](https://github.com/stevenkim18/AppStoreSearchClone/#구현-기능-소개)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[앱 검색 및 앱 상세 화면](https://github.com/stevenkim18/AppStoreSearchClone/#앱-검색-및-앱-상세-화면)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[최근 검색어 기능](https://github.com/stevenkim18/AppStoreSearchClone/#최근-검색어-기능)<br>
-
-[앱 구조](https://github.com/stevenkim18/AppStoreSearchClone/#앱-구조)<br>
-
-[고민한 점](https://github.com/stevenkim18/AppStoreSearchClone/#고민한-점)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[2개의 TableView를 사용해서 각각 구현 VS 2개의 Cell을 1개의 TableView에 구현](https://github.com/stevenkim18/AppStoreSearchClone/#2개의-tableview를-사용해서-각각-구현-vs-2개의-cell을-1개의-tableview에-구현)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[앱의 의존성 관리를 어떻게 할 것인가?](https://github.com/stevenkim18/AppStoreSearchClone/#앱의-의존성-관리를-어떻게-할-것인가)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[UseCase의 역할은 무엇인가?](https://github.com/stevenkim18/AppStoreSearchClone/#usecase의-역할은-무엇인가)<br>
-
-[트러블 슈팅](https://github.com/stevenkim18/AppStoreSearchClone/#트러블-슈팅)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[네비게이션 바 타이틀에 오른쪽에 있는 프로필 영역이 스크롤시에 실제 앱스토어와 똑같이 동작하게 만들기](https://github.com/stevenkim18/AppStoreSearchClone/#네비게이션-바-타이틀에-오른쪽에-있는-프로필-영역이-스크롤시에-실제-앱스토어와-똑같이-동작하게-만들기)<Br>
-
-[기술적 의사 결정](https://github.com/stevenkim18/AppStoreSearchClone/#기술적-의사-결정)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[ReactorKit](https://github.com/stevenkim18/AppStoreSearchClone/#reactorkit)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[RxDatasource](https://github.com/stevenkim18/AppStoreSearchClone/#rxdatasource)<Br><br>
-
+<Br>
 
 # 사용 기술
-- UI - SnapKit
-- 아키택쳐 패턴 - ReactorKit, Clean Architecture
-- Reactive Programming - RxSwift, RxCocoa, RxDataSource, RxOptional
-- Etc - Then, ReusableKit
+| 분류 | 기술 |
+| --- | --- |
+| UI | SnapKit |
+| 아키택쳐 패턴 | ReactorKit, Clean Architecture |
+| Reactive Programming  | RxSwift, RxCocoa, RxDataSource, RxOptional |
+| Etc | Then, ReusableKit |
+
+[⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
 <br><br>
+
+
 
 # 구현 기능 소개
 
@@ -45,10 +47,12 @@
 | --- | --- | --- |
 | ![21](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/414fdfaa-93c4-48c0-81b3-71c46a8e483c) | ![22](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/acdae85b-c77a-458d-9ab4-278b44401329) | ![23](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/7e2f30c2-b5ef-43a0-80f1-6db6976c7ea5) |
 
-<br>
+[⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
+<br><br>
 
 # 앱 구조
 ![3](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/6f47118c-8de8-4db3-9bf6-03f8802e252d)
+[⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
 <br><br>
 
 # 고민한 점
@@ -308,8 +312,8 @@ class SearchViewUsecase {
 	...
 }
 ```
-
-<Br>
+[⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
+<Br><br>
 
 # 트러블 슈팅
 
@@ -351,7 +355,8 @@ for view in navigationBar.subviews {
 ```
 ![6](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/d04605ee-e17b-479c-b373-881a65047362)
 
-<br>
+[⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
+<br><br>
 
 # 기술적 의사 결정
 
@@ -441,8 +446,9 @@ extension SearchViewController {
 ```
 
 `sectionItem` 변수로 어떤 유형의 cell인지를 구분하여 cell을 설정해줄 수 있습니다. 해당 프로젝트에서는 한 번에 한가지 cell 종류만 나오지만, 만약에 1개의 TableView에서 동시에 다른 2가지 이상의 cell 나와야 된다고 해도 위 코드에서 변경 될 것은 없습니다. 이렇게 여러 개의 cell도 깔끔하게 구현이 되는 장점을 가지고 있습니다.
-
-<br>
+<Br>
+[⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
+<br><br>
 
 # 참고자료
 
