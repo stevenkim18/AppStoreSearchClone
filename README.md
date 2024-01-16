@@ -17,41 +17,18 @@
 
 | 앱 검색 | 앱 상세 화면 | 앱 검색 결과 없음 |
 | --- | --- | --- |
-|  |  |  |
+|  ![11](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/40c3e33d-4e6f-48cb-b0b5-b670f46774fa) | ![12](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/12167f6d-a3c2-4de9-99d2-e6eef608ea19) | ![13](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/c9605957-f2bc-45b5-bfcc-21f0ca19c3e8) |
 
-![앱 검색](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/46aa774d-54c0-4e54-b077-919e11ed24f6/Untitled.gif)
 
-앱 검색
-
-![앱 상세 화면](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/c0f1ef06-11e8-43af-aaf7-0530105e4b7b/Untitled.gif)
-
-앱 상세 화면
-
-![앱 검색 결과 없음.](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/5508a15d-2d20-4cb1-871b-280bfaaa44a4/Untitled.gif)
-
-앱 검색 결과 없음.
-
-## 최근 검색어 기능
+## 최근 검ㅍ색어 기능
 
 | 기기에 저장된 최근 검색어 | 목록 클릭시 바로 검색 실행 | 타이핑 시 실시간으로 최근 검색어와 매칭되는 검색어 노출 |
 | --- | --- | --- |
-|  |  |  |
+| ![21](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/414fdfaa-93c4-48c0-81b3-71c46a8e483c) | ![22](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/acdae85b-c77a-458d-9ab4-278b44401329) | ![23](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/7e2f30c2-b5ef-43a0-80f1-6db6976c7ea5) |
 
-![기기에 저장된 최근 검색어](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/18c6e786-bb93-430b-a5a3-2dd38b6e511f/Untitled.gif)
-
-기기에 저장된 최근 검색어
-
-![목록 클릭시 바로 검색 실행](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/be7c574a-d882-4af3-bdb4-8756a18607cc/Untitled.gif)
-
-목록 클릭시 바로 검색 실행
-
-![키보드 입력 시 실시간으로 최근 검색어 매칭되는 검색어 노출.](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/4c950427-521e-4fee-9659-5586c46e1a10/Untitled.gif)
-
-키보드 입력 시 실시간으로 최근 검색어 매칭되는 검색어 노출.
 
 # 앱 구조
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/1274efd9-513a-4c78-8009-301c604a956c/Untitled.png)
+![3](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/6f47118c-8de8-4db3-9bf6-03f8802e252d)
 
 # 고민한 점
 
@@ -72,9 +49,9 @@
 
 TableView는 다양한 기능을 제공합니다. 여러개의 Cell도 register하여 사용 가능합니다. 그리고 무엇보다 RxSwift를 사용하고 있는 입장에서 **RxDatasource**라는 아주 강력한 라이브리러가 있습니다. 이것을 사용하면 복잡한 TableView 구현이 가능하고 애니메이션까지 지원이 가능합니다. 이러한 이유들도 2번 방법을 선택하였습니다.
 
-### **구현 방법**
+### 구현 방법
+![4](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/3053d2a1-ae33-4da9-bf82-a5172530b827)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/a2765ec5-eadd-498d-a120-23bbcdccba3c/Untitled.png)
 
 먼저 RxDatasource에서 제공하는 SectionModelType을 채택한 Section을 만든다.
 
@@ -325,7 +302,8 @@ UIKit도 개발자에게 제공되는 인터페이스이기 때문에 외부에�
 
 아래 View Hierarchy를 봅시다
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/b93c2824-a2bc-4e0b-957d-4e139355b980/Untitled.png)
+![5](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/1aacd195-6c6b-49b6-961a-1dffe1ccdb52)
+
 
 NavigationBar의 LargeTitle의 뷰 부분이 `_UINavigationBarLargeTitleView` 로 되어 있습니다. (내부 클래스들은 앞에 언더바(_)가 붙는 것 같습니다\) `NSClassFromString` 를 사용해서 접근하고 LargeTitle 뷰에 프로필 이미지에 대한 제약을 걸어 실제 앱스토어와 똑같게 구현할 수 있었습니다.
 
@@ -348,8 +326,9 @@ for view in navigationBar.subviews {
 		}
 }
 ```
+![6](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/d04605ee-e17b-479c-b373-881a65047362)
 
-![화면 기록 2024-01-15 오후 9.02.43.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/bc518957-ced6-41d2-aaeb-754bc2ac7595/089c90cc-66ae-4624-ab81-2656b8df32b3/%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB_%E1%84%80%E1%85%B5%E1%84%85%E1%85%A9%E1%86%A8_2024-01-15_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.02.43.gif)
+
 
 # 기술적 의사 결정
 
