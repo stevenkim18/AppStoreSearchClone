@@ -20,7 +20,7 @@
 |  ![11](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/40c3e33d-4e6f-48cb-b0b5-b670f46774fa) | ![12](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/12167f6d-a3c2-4de9-99d2-e6eef608ea19) | ![13](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/c9605957-f2bc-45b5-bfcc-21f0ca19c3e8) |
 
 
-## 최근 검ㅍ색어 기능
+## 최근 검색어 기능
 
 | 기기에 저장된 최근 검색어 | 목록 클릭시 바로 검색 실행 | 타이핑 시 실시간으로 최근 검색어와 매칭되는 검색어 노출 |
 | --- | --- | --- |
@@ -34,16 +34,16 @@
 
 ## 2개의 TableView를 사용해서 각각 구현 VS 2개의 Cell을 1개의 TableView에 구현
 
-### **요구사항**
+### 요구사항
 
 최근 검색어 목록과 검색된 앱 정보 목록이 한 화면에서 구현되어야 합니다.
 
-### **구현 방법 경우의 수**
+### 구현 방법 경우의 수
 
 1. 앱 정보 목록을 보여줄 TableView와 최근 검색어 목록을 보여줄 TableView를 각각 구현하고 상황에 따라서 한 개의 TableView를 hidden 처리 해야 합니다.
 2. 1개의 TableView안에서 앱 정보 Cell과 최근 검색어 Cell를 구현합니다.
 
-### **1개의 TableView안에서 2개의 Cell 구현(2번 방법)을 선택한 이유**
+### 1개의 TableView안에서 2개의 Cell 구현(2번 방법)을 선택한 이유
 
 2개의 TableView를 사용하게 되면 각 TableView의 숨김 처리 여부에 대한 상태 값이 2개나 더 생겨버리게 됩니다. 해당 화면에 기능이 복잡해질 경우 상태 값에 따른 사이드 이펙트로 버그가 발생할 우려가 크다고 판단했습니다. 
 
@@ -75,12 +75,12 @@ extension SearchSection: AnimatableSectionModelType {
     }
 }
 
-**extension SearchSection {
+extension SearchSection {
     enum Item: Hashable {
         case searchItem(AppInfoEntity) // 앱 검색 결과
         case recentKeyword(String)     // 최근 검색어
     }
-}**
+}
 
 extension SearchSection.Item: IdentifiableType {
     var identity: String {
@@ -97,10 +97,10 @@ extension SearchSection.Item: IdentifiableType {
 SearchViewController.swift
 
 class SearchViewController {
-		lazy var datasoure = self.createDataSource()
+    lazy var datasoure = self.createDataSource()
 		
-		// 테이블뷰와 리엑터의 상태(section)과 바인딩.
-		private func bindSection(reactor: SearchViewReactor) {
+    // 테이블뷰와 리엑터의 상태(section)과 바인딩.
+    private func bindSection(reactor: SearchViewReactor) {
         reactor.state
             .map { $0.section }
             .distinctUntilChanged()
@@ -111,8 +111,8 @@ class SearchViewController {
     private func createDataSource() -> RxTableViewSectionedAnimatedDataSource<SearchSection> {
         return .init(
             animationConfiguration: AnimationConfiguration(reloadAnimation: .none),
-            configureCell: { _, tableview, indexPath, **sectionItem** in
-                switch **sectionItem** {
+            configureCell: { _, tableview, indexPath, sectionItem in
+                switch sectionItem {
                 // 앱 검색 결과
                 case let .searchItem(entity):
                     let cell = tableview.dequeue(Reusable.appInfoCell, for: indexPath)
@@ -136,33 +136,33 @@ RxDataSource의 이니셜라이져에서 `Section.Item` 타입의 프로퍼티�
 SearchReactor.swift
 
 class SearchReactor {
-		struct State {
-				// 빈 섹션으로 초기화
-				var section: [SearchSection] = [.init(header: "", identity: .items, items: [])]
-		}
+    struct State {
+        // 빈 섹션으로 초기화
+        var section: [SearchSection] = [.init(header: "", identity: .items, items: [])]
+    }
 
-		func reduce(state: State, mutation: Mutation) -> State {
-				switch mutation {
-						// 앱 정보 API 호출 후
-						case let .addAppInfo(entitys):
-		            var newState = state
-		            let items: [SearchSection.Item] = entitys.map { entity in
-		                SearchSection.Item.searchItem(entity)
-		            }
-		            let section: SearchSection = .init(header: "", identity: .items, items: items)
-		            newState.section[0] = section
-		            return newState
-						// 최근 검색어 목록 읽어오기 성공 후
-						case let .setRecentKeywords(keywords):
-		            var newState = state
-		            let items: [SearchSection.Item] = keywords.map { keyword in
-		                SearchSection.Item.recentKeyword(keyword)
-		            }
-		            let section: SearchSection = .init(header: "최근 검색어", identity: .keyword, items: items)
-		            newState.section[0] = section
-		            return newState
-				}
-		}
+    func reduce(state: State, mutation: Mutation) -> State {
+    switch mutation {
+        // 앱 정보 API 호출 후
+        case let .addAppInfo(entitys):
+            var newState = state
+            let items: [SearchSection.Item] = entitys.map { entity in
+                SearchSection.Item.searchItem(entity)
+            }
+            let section: SearchSection = .init(header: "", identity: .items, items: items)
+            newState.section[0] = section
+            return newState
+        // 최근 검색어 목록 읽어오기 성공 후
+        case let .setRecentKeywords(keywords):
+            var newState = state
+            let items: [SearchSection.Item] = keywords.map { keyword in
+                SearchSection.Item.recentKeyword(keyword)
+            }
+            let section: SearchSection = .init(header: "최근 검색어", identity: .keyword, items: items)
+            newState.section[0] = section
+            return newState
+        }
+    }
 }
 ```
 
@@ -170,7 +170,7 @@ tableview의 `items`와 `section`을 바인딩했기에 tableview를 위한 새�
 
 ## 앱의 의존성 관리를 어떻게 할 것인가?
 
-### **앱 구조**
+### 앱 구조
 
 앱의 큰 구조를 ReactorKit + CleanArchitecture를 따르고 각 타입에 대한 의존성을 생성자를 통해서 주입을 받게 설계하였습니다. 이에 따라 한개의 화면을 이동하려고 할 때 많은 타입들에 의존성을 주입해야 합니다.
 
@@ -279,11 +279,11 @@ Usecase를 잘 설계하게 되면 앱에서 사용되는 **비지니스 로직 
 ```swift
 class SearchViewUsecase {
 	...
-	func filterMatchedKeyword(_ searchedKeyword: String) -> [String] {
-	        let keywords = fetchKeyword() // 레포지토리에서 가져옴.
-	        if searchedKeyword.isEmpty { return keywords }
-	        return keywords.filter { $0.contains(searchedKeyword) }
-	}
+    func filterMatchedKeyword(_ searchedKeyword: String) -> [String] {
+        let keywords = fetchKeyword() // 레포지토리에서 가져옴.
+        if searchedKeyword.isEmpty { return keywords }
+        return keywords.filter { $0.contains(searchedKeyword) }
+    }
 	...
 }
 ```
@@ -309,46 +309,44 @@ NavigationBar의 LargeTitle의 뷰 부분이 `_UINavigationBarLargeTitleView` �
 
 ```swift
 guard let UINavigationBarLargeTitleView = 
-		NSClassFromString("_UINavigationBarLargeTitleView") else {
-		return
+    NSClassFromString("_UINavigationBarLargeTitleView") else {
+    return
 }
         
 for view in navigationBar.subviews {
     if view.isKind(of: UINavigationBarLargeTitleView.self) {
         view.addSubview(rightbarImageView)
         rightbarImageView.snp.makeConstraints { make in
-						make.bottom.equalTo(view.snp.bottom).inset(10)
-						make.trailing.equalTo(view.snp.trailing).inset(view.directionalLayoutMargins.trailing)
-						make.width.equalTo(rightbarImageView.snp.height)
-						make.height.equalTo(40)
-				}
-				break
-		}
+            make.bottom.equalTo(view.snp.bottom).inset(10)
+            make.trailing.equalTo(view.snp.trailing).inset(view.directionalLayoutMargins.trailing)
+            make.width.equalTo(rightbarImageView.snp.height)
+            make.height.equalTo(40)
+        }
+    break
+    }
 }
 ```
 ![6](https://github.com/stevenkim18/AppStoreSearchClone/assets/35272802/d04605ee-e17b-479c-b373-881a65047362)
-
-
 
 # 기술적 의사 결정
 
 ## ReactorKit
 
-### **단방향 아키택쳐**
+### 단방향 아키택쳐
 
 Reactorkit은 Flux와 Reactive Programming을 기반으로 한 단방향 아키택쳐입니다. View → Action → Reactor(mutate → reduce) → State → View의 흐름으로 데이터가 이동합니다. 이렇게 되면 데이터 흐름이 단순하기 때문에 디버깅하기가 용이해지고 테스트도 쉬워집니다.
 
-### **상태관리**
+### 상태관리
 
 Reactorkit은 State 타입으로 화면의 상태들을 관리합니다. SwiftUI나 Flutter 같은 경우에는 프레임워크에서 상태관리를 해주도록 강제하고 있는데 UIKit은 그렇지 않습니다. 복잡한 화면에서 상태 관리는 필수라고 생각합니다. Reactorkit은 Mutation의 결과로 받은 것을 `reduce()` 함수에서 새로운 상태 값으로 변경해줍니다. 상태값 관리와 변경을 한 곳에서 관리해주기 때문에 복잡한 뷰들도 상태만 잘 설계하면 구현하기 용이합니다.
 
-### **탬플릿화 하기 유용함**
+### 탬플릿화 하기 유용함
 
 MVVM 아키택쳐가 모바일 개발에서 많이 사용되지만, 개발자들 마다 조금씩 정의하는 것과 구현하는 것이 다른 경우가 많습니다. 반면에 Reactorkit은 역할을 명확하게 분리하여 정의하고 있기 때문에 어떤 개발자가 와도 같은 포맷으로 개발을 할 수 있습니다. Reactorkit을 기반으로 파일과 구현 형식을 탬플릿화 하기에도 용이합니다. 어느 정도 규모 있는 앱도 여러 개발자가 협업하기 좋습니다.
 
 ## RxDatasource
 
-### **왜 사용했는가?**
+### 왜 사용했는가?
 
 RxCocoa에서 제공하는 방법으로도 TableView를 구현할 수 있습니다. 하지만 Section이 여러개 있는 복잡한 경우나 애니메이션이 필요할 때는 RxDatasource를 사용해야 합니다. (필수는 아니지만 시간을 아주 많이 단축시켜줍니다) 
 
@@ -357,9 +355,7 @@ RxCocoa에서 제공하는 방법으로도 TableView를 구현할 수 있습니�
 ```swift
 public protocol SectionModelType {
     associatedtype Item
-
     var items: [Item] { get }
-
     init(original: Self, items: [Item])
 }
 ```
@@ -380,18 +376,17 @@ extension SearchSection: SectionModelType {
 ```swift
 open class TableViewSectionedDataSource<**Section**: SectionModelType> {
 ...
-		public typealias Item = **Section.Item**
-		public typealias ConfigureCell = (TableViewSectionedDataSource<Section>, UITableView, IndexPath, **Item**) -> UITableViewCell
+    public typealias Item = **Section.Item**
+    public typealias ConfigureCell = (TableViewSectionedDataSource<Section>, UITableView, IndexPath, Item) -> UITableViewCell
 		
-		public init(configureCell: @escaping ConfigureCell,
-								...) {
-					self.configureCell = configureCell
+    public init(configureCell: @escaping ConfigureCell,
+            ...) {
+            self.configureCell = configureCell
+    }
 
-		}
-
-		open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-				...        
-        return configureCell(self, tableView, indexPath, **self[indexPath]**)
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        ...        
+        return configureCell(self, tableView, indexPath, self[indexPath])
     }
 ...
 }
@@ -403,7 +398,7 @@ open class TableViewSectionedDataSource<**Section**: SectionModelType> {
 extension SearchViewController {
     private func createDataSource() -> RxTableViewSectionedDataSource<SearchSection> {
         return .init(
-            configureCell: { _, tableview, indexPath, **sectionItem** in
+            configureCell: { _, tableview, indexPath, sectionItem in
                 switch sectionItem {
                 case let .searchItem(entity):
                     let cell = tableview.dequeue(Reusable.appInfoCell, for: indexPath)
