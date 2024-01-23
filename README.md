@@ -28,6 +28,8 @@
 | Reactive Programming  | RxSwift, RxCocoa, RxDataSource, RxOptional |
 | Etc | Then, ReusableKit |
 
+📌 디자인은 Figma를 참고하였습니다. [AppStore iOS 15 Figma 링크](https://www.figma.com/file/YDYNYPW8UK0jLoOkrWdqcE/iOS-15-AppStore-Light-%26-Dark-(Community)?type=design&node-id=279%3A376&mode=design&t=1UYAx60aFCE8ujYu-1)
+
 [⤴️ 목차로 가기](https://github.com/stevenkim18/AppStoreSearchClone#목차)
 <br><br>
 
